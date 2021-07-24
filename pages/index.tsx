@@ -46,6 +46,19 @@ export default function Home() {
           <Box className="list-display" >
             <Heading as="h1" size="2xl" color="pinkPurple" m="md" >{t.projects}</Heading>
             <Card variant="subtle" color="pink" m="sm" >
+              <Heading size="lg" className="card-title" p="sm" >Vänner Bäst</Heading>
+              <Paragraph  px="md" >
+                A website to promote the Netflix TV programme "Young Royals". Not seen it yet? You totally should, there's a link on this website that will take you straight to Netflix!
+              </Paragraph>
+              <Link href='https://vannerba.st' passHref><Anchor
+                isExternal={true}
+                p="sm"
+                color="pink"
+                hoverColor="purple" >
+                  View
+              </Anchor></Link>
+            </Card>
+            <Card variant="subtle" color="pink" m="sm" >
               <Heading size="lg" className="card-title" p="sm" >Arbúcies</Heading>
               <Paragraph  px="md" >
                 A game project for the JVM written in Kotlin.
