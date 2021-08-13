@@ -67,7 +67,14 @@ export default function mc() {
                 <Heading as="h1" size="2xl">Server</Heading>
                 <Heading size="xl">Vanilla</Heading>
                 <Paragraph>I run a vanilla server with a couple of utility plugins. You can join by entering mc.ludoviko.xyz as the server IP.
-                <CopyToClipboard text='mc.ludoviko.xyz' onCopy={copyVan}><Button color="purple" ml="xs">{ copiedVan ? 'Copied' : 'Copy server IP' }</Button></CopyToClipboard></Paragraph>
+                <CopyToClipboard text='mc.ludoviko.ch' onCopy={copyVan}><Button color="purple" ml="xs">{ copiedVan ? 'Copied' : 'Copy server IP' }</Button></CopyToClipboard></Paragraph>
+                <Link href='https://mc.ludoviko.ch' passHref><Anchor
+                        isExternal={true}
+                        p="sm"
+                        color="purple"
+                        hoverColor="pink" >
+                        View map
+                    </Anchor></Link>
             </Card>
         </>
     )
