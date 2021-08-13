@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import 'bootstrap/dist/css/bootstrap.css'
 import '@dracula/dracula-ui/styles/dracula-ui.css'
 import { AppProps } from 'next/app'

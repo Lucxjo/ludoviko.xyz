@@ -1,7 +1,7 @@
 const withMDX = require('@next/mdx')()
 const withTM = require("next-transpile-modules")([
-  "unist-util-visit-parents",
-  "unist-util-visit-children"
+    "unist-util-visit-parents",
+    "unist-util-visit-children"
 ]);
 
 module.exports = {
@@ -15,12 +15,13 @@ module.exports = {
                 source: '/api/event', // Or '/api/event/' if you have `trailingSlash: true` in this config
                 destination: 'https://plausible.io/api/event'
             }
-      ];
-  },
+        ];
+    },
 }
 
 module.exports = withTM({
     ...withMDX(),
+    webpack5: true,
     i18n: {
         locales: ['en'],
         defaultLocale: 'en'
@@ -28,20 +29,17 @@ module.exports = withTM({
     images: {
         domains: ['liberapay.com'],
     },
-  async headers() {
-    return [
-        {
-            source: "/(.*)",
-            headers: [
-                {
-                    key: 'Access-Control-Allow-Origin',
-                    value: '*'
-                }
-            ]
-        }
-    ]
-  },
-  future: {
-    webpack5: true, // if you want to use webpack 5
-  },
+    async headers() {
+        return [
+            {
+                source: "/(.*)",
+                headers: [
+                    {
+                        key: 'Access-Control-Allow-Origin',
+                        value: '*'
+                    }
+                ]
+            }
+        ]
+    }
 });

@@ -3,6 +3,8 @@ node_modules
 # Local Netlify folder
 .netlify
 *.log
-.npmrc
+/.npmrc
 dist/
 .next/
+.vercel
+posts/open.md
