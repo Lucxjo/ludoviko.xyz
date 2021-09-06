@@ -12,7 +12,7 @@ export default function mc() {
         <>
             <Card p="md" m="md" color="blackSecondary">
                 <Head>
-                    <title>Ludoviko.xyz | Minecraft</title>
+                    <title>Ludoviko | Minecraft</title>
                 </Head>
                 <Heading as="h1" size="2xl" id="mods">Minecraft Mods</Heading>
                 <Paragraph>I am currently only working on two Minecraft projects that have been released.
