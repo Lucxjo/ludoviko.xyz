@@ -50,6 +50,13 @@ export default function Home() {
               <Paragraph  px="md" >
                 A website to promote the Netflix TV programme "Young Royals". Not seen it yet? You totally should, there's a link on this website that will take you straight to Netflix!
               </Paragraph>
+              <Link href='https://github.com/Lucxjo/friends-best' passHref><Anchor
+                isExternal={true}
+                p="sm"
+                color="pink"
+                hoverColor="purple" >
+                  Source
+              </Anchor></Link>
               <Link href='https://vannerba.st' passHref><Anchor
                 isExternal={true}
                 p="sm"
@@ -70,7 +77,7 @@ export default function Home() {
                 p="sm"
                 color="pink"
                 hoverColor="purple" >
-                  Github Project
+                  Source
               </Anchor></Link>
               <Link href='https://youtube.com/playlist?list=PLlrATfBNZ98eOOCk2fOFg7Qg5yoQfFAdf' passHref><Anchor
                 isExternal={true}
@@ -110,7 +117,7 @@ export default function Home() {
                 p="sm"
                 color="pink"
                 hoverColor="purple" >
-                  Github Project
+                  Source
               </Anchor></Link>
               <Link href='https://v.ludoviko.xyz' passHref><Anchor
                 isExternal={true}
@@ -131,7 +138,7 @@ export default function Home() {
                 p="sm"
                 color="pink"
                 hoverColor="purple" >
-                  Github Project
+                  Source
               </Anchor></Link>
             </Card>
           </Box>

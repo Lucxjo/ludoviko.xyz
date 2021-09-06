@@ -31,6 +31,7 @@ export default function Navigation() {
                     <Link href="/#projects" passHref><Anchor className="nav-item nav-link" color="purple" hoverColor="pink">{t.projects}</Anchor></Link>
                     <Link  href="/#social" passHref><Anchor className="nav-item nav-link" color="purple" hoverColor="pink">{t.social}</Anchor></Link>
                     <Link href="/blog" passHref><Anchor className="nav-item nav-link" color="purple" hoverColor="pink">{t.blog}</Anchor></Link>
+                    <Link href="/discord" passHref><Anchor className="nav-item nav-link" color="purple" hoverColor="pink">Discord</Anchor></Link>
                 </div>
             </div>
         </div>

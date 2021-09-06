@@ -27,15 +27,15 @@ export default function mc() {
                     <Link href='https://github.com/Lucxjo/Kontrolo-Fabric' passHref><Anchor
                         isExternal={true}
                         p="sm"
-                        color="purple"
-                        hoverColor="pink" >
+                        color="pink"
+                        hoverColor="purple" >
                             Source
                     </Anchor></Link>
                     <Link href='https://modrinth.com/mod/kontrolo' passHref><Anchor
                         isExternal={true}
                         p="sm"
-                        color="purple"
-                        hoverColor="pink" >
+                        color="pink"
+                        hoverColor="purple" >
                             Download
                     </Anchor></Link>
                 </Card>
@@ -49,15 +49,15 @@ export default function mc() {
                     <Link href='https://github.com/Lucxjo/Kontrolo-Forge' passHref><Anchor
                         isExternal={true}
                         p="sm"
-                        color="purple"
-                        hoverColor="pink" >
+                        color="pink"
+                        hoverColor="purple" >
                             Source
                     </Anchor></Link>
                     <Link href='https://modrinth.com/mod/kontrolo-forge' passHref><Anchor
                         isExternal={true}
                         p="sm"
-                        color="purple"
-                        hoverColor="pink" >
+                        color="pink"
+                        hoverColor="purple" >
                         Download
                     </Anchor></Link>
                 </Card>
@@ -65,14 +65,17 @@ export default function mc() {
 
             <Card p="md" m="md" id="server" color="blackSecondary">
                 <Heading as="h1" size="2xl">Server</Heading>
+                <Paragraph>You can contribute to the running of these servers directly by donating with Crypto! If you don't use crypto, feel free to head to<Link href="/donate" passHref><Anchor m="sm" color="pink">the donations page</Anchor></Link>for more options</Paragraph>
+                <Link href="https://commerce.coinbase.com/checkout/447b8221-52c5-4759-a47e-444ce341f296" passHref ><Button color="pink" mb="sm">Donate with Crypto</Button></Link>
+                <br />
                 <Heading size="xl">Vanilla</Heading>
-                <Paragraph>I run a vanilla server with a couple of utility plugins. You can join by entering mc.ludoviko.xyz as the server IP.
-                <CopyToClipboard text='mc.ludoviko.ch' onCopy={copyVan}><Button color="purple" ml="xs">{ copiedVan ? 'Copied' : 'Copy server IP' }</Button></CopyToClipboard></Paragraph>
+                <Paragraph>I run a vanilla server with a couple of utility plugins. You can join by entering mc.ludoviko.ch as the server IP.
+                <CopyToClipboard text='mc.ludoviko.ch' onCopy={copyVan}><Button color="pink" ml="xs">{ copiedVan ? 'Copied' : 'Copy server IP' }</Button></CopyToClipboard></Paragraph>
                 <Link href='https://mc.ludoviko.ch' passHref><Anchor
                         isExternal={true}
                         p="sm"
-                        color="purple"
-                        hoverColor="pink" >
+                        color="pink"
+                        hoverColor="purple" >
                         View map
                     </Anchor></Link>
             </Card>
