@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useState } from 'react';
+import ProjectCard from '../components/project-card';
 
 export default function mc() {
     const [copiedVan, setCopiedVan] = useState(false);
@@ -18,49 +19,18 @@ export default function mc() {
                     However, I will be making more in the future that will primarily target the Fabric mod loader</Paragraph>
 
                 <Heading size="xl" id="fabric">Fabric</Heading>
-                <Card variant="subtle" color="pink" m="sm" >
-                    <Heading size="lg" className="card-title" p="sm" >Kontrolo</Heading>
-                    <Paragraph  px="md" >
-                        A Minecraft mod for the Fabric mod loader. This mod adds a GUI for common commands that can be clicked to be excecuted.
-                        The mod also adds a GUI for you to add your own commands through a config file.
-                    </Paragraph>
-                    <Link href='https://github.com/Lucxjo/Kontrolo-Fabric' passHref><Anchor
-                        isExternal={true}
-                        p="sm"
-                        color="pink"
-                        hoverColor="purple" >
-                            Source
-                    </Anchor></Link>
-                    <Link href='https://modrinth.com/mod/kontrolo' passHref><Anchor
-                        isExternal={true}
-                        p="sm"
-                        color="pink"
-                        hoverColor="purple" >
-                            Download
-                    </Anchor></Link>
-                </Card>
+                <ProjectCard
+                    title="Kontrolo"
+                    description="A Minecraft mod for the Fabric mod loader. This mod adds a GUI for common commands that can be clicked to be excecuted.
+                        The mod also adds a GUI for you to add your own commands through a config file."
+                    link1="https://modrinth.com/mod/kontrolo"
+                    link0="https://github.com/Lucxjo/Kontrolo-Fabric" />
                 <Heading size="xl" id="forge">Forge</Heading>
-                <Card variant="subtle" color="pink" m="sm" >
-                    <Heading size="lg" className="card-title" p="sm" >Kontrolo</Heading>
-                    <Paragraph  px="md" >
-                        A Minecraft mod for the Forge mod loader. This mod adds a GUI for common commands that can be clicked to be excecuted.
-                        The mod also adds a GUI for you to add your own commands through a config file.
-                    </Paragraph>
-                    <Link href='https://github.com/Lucxjo/Kontrolo-Forge' passHref><Anchor
-                        isExternal={true}
-                        p="sm"
-                        color="pink"
-                        hoverColor="purple" >
-                            Source
-                    </Anchor></Link>
-                    <Link href='https://modrinth.com/mod/kontrolo-forge' passHref><Anchor
-                        isExternal={true}
-                        p="sm"
-                        color="pink"
-                        hoverColor="purple" >
-                        Download
-                    </Anchor></Link>
-                </Card>
+                <ProjectCard
+                    title="Kontrolo"
+                    description="A Minecraft mod for the Fabric mod loader. This mod adds a GUI for common commands that can be clicked to be excecuted. The mod also adds a GUI for you to add your own commands through a config file."
+                    link1="https://modrinth.com/mod/kontrolo-forge"
+                    link0="https://github.com/Lucxjo/Kontrolo-Forge" />
             </Card>
 
             <Card p="md" m="md" id="server" color="blackSecondary">
