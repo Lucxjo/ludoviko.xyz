@@ -24,13 +24,15 @@ export default function mc() {
                     description="A Minecraft mod for the Fabric mod loader. This mod adds a GUI for common commands that can be clicked to be excecuted.
                         The mod also adds a GUI for you to add your own commands through a config file."
                     link1="https://modrinth.com/mod/kontrolo"
-                    link0="https://github.com/Lucxjo/Kontrolo-Fabric" />
+                    link0="https://github.com/Lucxjo/Kontrolo-Fabric"
+                    link1Text="Download" />
                 <Heading size="xl" id="forge">Forge</Heading>
                 <ProjectCard
                     title="Kontrolo"
                     description="A Minecraft mod for the Fabric mod loader. This mod adds a GUI for common commands that can be clicked to be excecuted. The mod also adds a GUI for you to add your own commands through a config file."
                     link1="https://modrinth.com/mod/kontrolo-forge"
-                    link0="https://github.com/Lucxjo/Kontrolo-Forge" />
+                    link0="https://github.com/Lucxjo/Kontrolo-Forge"
+                    link1Text="Download" />
             </Card>
 
             <Card p="md" m="md" id="server" color="blackSecondary">

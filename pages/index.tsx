@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
 import { Box, Heading, Anchor, List, Card, Paragraph, Avatar } from '@dracula/dracula-ui'
 import en from '../lang/en'
+import ProjectCard from '../components/project-card'
 
 export default function Home() {
   const t = en
@@ -45,102 +46,35 @@ export default function Home() {
           <Anchor href="/#projects"></Anchor>
           <Box className="list-display" >
             <Heading as="h1" size="2xl" color="pinkPurple" m="md" >{t.projects}</Heading>
-            <Card variant="subtle" color="pink" m="sm" >
-              <Heading size="lg" className="card-title" p="sm" >Vänner Bäst</Heading>
-              <Paragraph  px="md" >
-                A website to promote the Netflix TV programme "Young Royals". Not seen it yet? You totally should, there's a link on this website that will take you straight to Netflix!
-              </Paragraph>
-              <Link href='https://github.com/Lucxjo/friends-best' passHref><Anchor
-                isExternal={true}
-                p="sm"
-                color="pink"
-                hoverColor="purple" >
-                  Source
-              </Anchor></Link>
-              <Link href='https://vannerba.st' passHref><Anchor
-                isExternal={true}
-                p="sm"
-                color="pink"
-                hoverColor="purple" >
-                  View
-              </Anchor></Link>
-            </Card>
-            <Card variant="subtle" color="pink" m="sm" >
-              <Heading size="lg" className="card-title" p="sm" >Arbúcies</Heading>
-              <Paragraph  px="md" >
-                A game project for the JVM written in Kotlin.
+            <ProjectCard
+              title="Vänner Bäst"
+              description="A website to promote the Netflix TV programme 'Young Royals'. Not seen it yet? You totally should, there's a link on this website that will take you straight to Netflix!"
+              link0="https://github.com/Lucxjo/friends-best"
+              link1="https://vannerba.st" />
+            <ProjectCard
+              title="Arbúcies"
+              description="A game project for the JVM written in Kotlin.
                 The game is a rewrite of a game made by TheCherno on YouTube,
-                this original project was made as a Java 2D game tutorial.
-              </Paragraph>
-              <Link href='https://github.com/Lucxjo/Arbucies' passHref><Anchor
-                isExternal={true}
-                p="sm"
-                color="pink"
-                hoverColor="purple" >
-                  Source
-              </Anchor></Link>
-              <Link href='https://youtube.com/playlist?list=PLlrATfBNZ98eOOCk2fOFg7Qg5yoQfFAdf' passHref><Anchor
-                isExternal={true}
-                p="xs"
-                color="pink"
-                hoverColor="purple" >
-                  Original Playlist
-              </Anchor></Link>
-            </Card>
-            <Card variant="subtle" color="pink" m="sm" >
-              <Heading size="lg" className="card-title" p="sm" >Minecraft Projects</Heading>
-              <Paragraph  px="md" >
-                I have a couple of Minecraft mods, these can be found on a different page. Click the link below to view them!
+                this original project was made as a Java 2D game tutorial."
+              link0="https://github.com/Lucxjo/Arbucies"
+              link1="https://youtube.com/playlist?list=PLlrATfBNZ98eOOCk2fOFg7Qg5yoQfFAdf"
+              link1Text="Original Playlist" />
+            <ProjectCard
+              title="Minecraft Projects"
+              description="I have a couple of Minecraft mods, these can be found on a different page. Click the link below to view them!
                 I also have a server, this can be found on the same page as the mods at the bottom.
-                The server link will jump you straight to that section!
-              </Paragraph>
-              <Link href='/mc/#mods' passHref><Anchor
-                p="sm"
-                color="pink"
-                hoverColor="purple" >
-                  Mods
-              </Anchor></Link>
-              <Link href='/mc/#server' passHref><Anchor
-                p="xs"
-                color="pink"
-                hoverColor="purple" >
-                  Server
-              </Anchor></Link>
-            </Card>
-            <Card variant="subtle" color="pink" m="sm" >
-              <Heading size="lg" className="card-title" p="sm" >Vetero.js</Heading>
-              <Paragraph  px="md" >
-                A simple weather app built in React.js
-              </Paragraph>
-              <Link href='https://github.com/Lucxjo/vetero-js' passHref><Anchor
-                isExternal={true}
-                p="sm"
-                color="pink"
-                hoverColor="purple" >
-                  Source
-              </Anchor></Link>
-              <Link href='https://v.ludoviko.xyz' passHref><Anchor
-                isExternal={true}
-                p="xs"
-                color="pink"
-                hoverColor="purple" >
-                  View
-              </Anchor></Link>
-            </Card>
-            <Card variant="subtle" color="pink" m="sm" >
-              <Heading size="lg" className="card-title" p="sm" >Ludoviko.xyz</Heading>
-              <Paragraph  px="md" >
-                This website! Technically it is one of my projects, so it deserves to be in this list. Right?
-                Built in Next.js with Dracuala theming from the Dracula UI kit.
-              </Paragraph>
-              <Link href='https://github.com/Lucxjo/ludoviko.xyz' passHref><Anchor
-                isExternal={true}
-                p="sm"
-                color="pink"
-                hoverColor="purple" >
-                  Source
-              </Anchor></Link>
-            </Card>
+                The server link will jump you straight to that section!"
+              link0="/mc/#mods"
+              link0Text="Mods"
+              link0Ext={false}
+              link1='/mc/#server'
+              link1Text="Server"
+              link1Ext={false} />
+            <ProjectCard
+              title="Ludoviko.xyz/Ludoviko.ch"
+              description="This website! Technically it is one of my projects, so it deserves to be in this list. Right?
+                Built in Next.js with Dracuala theming from the Dracula UI kit."
+              link0="https://github.com/Lucxjo/ludoviko.xyz" />
           </Box>
         </Card>
 
