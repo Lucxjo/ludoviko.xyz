@@ -18,7 +18,7 @@
     "@mdx-js/react": "^1.6.22",
     "@next/mdx": "^11.0.1",
     "@popperjs/core": "^2.9.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bootstrap": "^5.0.0-beta3",
     "express": "^4.17.1",
     "gray-matter": "^4.0.3",
