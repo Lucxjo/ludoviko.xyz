@@ -10,10 +10,10 @@
     "ready": "rm -rf dist && mkdir dist && rsync -rv * dist --exclude ./dist && rsync -rv ./.well-known dist --exclude ./dist",
     "dev": "next dev",
     "start": "next start",
-    "build": "next build"
+    "build": "next build",
+    "export": "next build && next export"
   },
   "dependencies": {
-    "@dracula/dracula-ui": "^0.8.1",
     "@mdx-js/loader": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@next/mdx": "^11.0.1",
@@ -42,6 +42,7 @@
     "@types/node": "^15.12.2",
     "@types/react": "^17.0.17",
     "deepmerge": "^4.2.2",
+    "prettier": "^2.4.0",
     "sass": "^1.37.0",
     "typescript": "^4.3.5"
   }
