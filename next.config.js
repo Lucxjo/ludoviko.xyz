@@ -24,6 +24,8 @@ module.exports = withTM({
     webpack5: true,
     images: {
         domains: ['liberapay.com'],
+        loader: 'cloudinary',
+        path: 'https://res.cloudinary.com/ludoviko/image/upload/'
     },
     async headers() {
         return [
