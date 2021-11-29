@@ -33,7 +33,7 @@ export function quote() {
         function visitor(node) {
             const data = node.data || (node.data = {})
             const props = data.hProperties || (data.hProperties = {})
-            var giveClasses = visitChildren(function(node) {
+            var giveClasses =  visitChildren(function(node) {
                 // @ts-ignore
                 node.data.hProperties.className = 'drac-text drac-text-pink drac-line-height drac-italics drac-m-xs'
             })

@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: ludoviko.xyz
+Token: f801325b5a4c54c6dbecfb1ee0bbdb098114edd950edd1d4506d207b7e4bd55f

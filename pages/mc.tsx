@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useState } from 'react';
 import ProjectCard from '../components/project-card';
+import PageLoader from 'next/dist/client/page-loader';
 
 export default function mc() {
     const [copiedVan, setCopiedVan] = useState(false);
@@ -41,8 +42,9 @@ export default function mc() {
                 <Link href="https://commerce.coinbase.com/checkout/447b8221-52c5-4759-a47e-444ce341f296" passHref ><Button color="pink" mb="sm">Donate with Crypto</Button></Link>
                 <br />
                 <Heading size="xl">Vanilla</Heading>
-                <Paragraph>I run a vanilla server with a couple of utility plugins. You can join by entering mc.ludoviko.ch as the server IP.
+                <Paragraph>I run a vanilla server with a couple of utility plugins. You can join by entering mc.ludoviko.ch as the server IP. You also need to join my discord server.
                 <CopyToClipboard text='mc.ludoviko.ch' onCopy={copyVan}><Button color="pink" ml="xs">{ copiedVan ? 'Copied' : 'Copy server IP' }</Button></CopyToClipboard></Paragraph>
+                <Paragraph>IMPORTANT: This server will be reset a couple of weeks after the release of Minecraft 1.18 when there is a Papermc build available. A torrent file for the world before the nukes hit will be generated for others to download.</Paragraph>
                 <Link href='https://mc.ludoviko.ch' passHref><Anchor
                         isExternal={true}
                         p="sm"

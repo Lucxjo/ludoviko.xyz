@@ -34,7 +34,7 @@ export default function Home() {
           <Heading as="h1" size="2xl" color="black" >Saluton!</Heading>
           <Heading size="xl" color="black" >{t.welcome}</Heading>
           <p></p>
-          <Link href="https://liberapay.com/Ludoviko/donate" passHref><Anchor><Image src="https://liberapay.com/assets/widgets/donate.svg" alt="Donate with Liberapay" width={90} height={30} /></Anchor></Link>
+          <Link href="https://liberapay.com/Ludoviko/donate" passHref><Anchor><Image src="liberapay.svg" alt="Donate with Liberapay" width={90} height={30} /></Anchor></Link>
         </Card>
 
         <Card rounded="lg" p="md" m="md" color="blackSecondary" id="about" >
