@@ -52,6 +52,8 @@ export default function mc() {
                         hoverColor="purple" >
                         View map
                     </Anchor></Link>
+
+                <Paragraph>The world files for the 1.17 server can now be downloaded from <Link href="https://web.tresorit.com/l/wERrS#HkSEVBAUMY97pEpG8NxswA" passHref><Anchor color="pink">here</Anchor></Link> or via <Link href="/mc-serv--1-17.tar.torrent" passHref><Anchor color="pink">Torrent (.tar.bz)</Anchor></Link></Paragraph>
             </Card>
         </>
     )
