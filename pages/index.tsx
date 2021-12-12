@@ -16,8 +16,19 @@ import {
 import en from '../lang/en';
 import ProjectCard from '../components/project-card';
 import LinkedListItem from '../components/linked-list-item';
+import { InferGetServerSidePropsType } from 'next';
 
-export default function Home() {
+export async function getServerSideProps() {
+	const res = await fetch('https://api.ludoviko.ch/v1/about/birthday/age');
+	const age = await res.json();
+	return {
+		props: {
+			age,
+		},
+	};
+}
+
+export default function Home({ age }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const t = en
 
   return (
@@ -43,7 +54,7 @@ export default function Home() {
             <Heading as="h1" size="2xl" color="pinkPurple" >{t.about}</Heading>
             <Heading size="lg" >So a bit about me:</Heading>
             <List variant="unordered" color="pink" >
-              <li className="drac-text drac-text-white" >Age: 22</li>
+						  <li className="drac-text drac-text-white" >Age: { age }</li>
               <li className="drac-text drac-text-white" >Location: Europe</li>
               <li className="drac-text drac-text-white" >Sexuality: Whatever it is, it isn't straight!</li>
               <li className="drac-text drac-text-white" >Pronouns: He/him, they/them</li>
