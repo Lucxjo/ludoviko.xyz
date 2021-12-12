@@ -1,0 +1,10 @@
+/.next
+/.vercel
+/.vscode
+/.well-known
+/node_modules
+/out
+/.env.local
+/.yarnrc.yml
+./index.html
+./yarn.lock
