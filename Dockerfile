@@ -11,4 +11,4 @@ COPY . .
 EXPOSE 3000
 RUN npm run build
 CMD ["npm", "run", "start"]
-LABEL org.opencontainers.image.source https://github.com/Lucxjo/LudoAPI
+LABEL org.opencontainers.image.source https://github.com/Lucxjo/ludoviko.xyz
