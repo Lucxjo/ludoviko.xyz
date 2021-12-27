@@ -20,22 +20,27 @@ module.exports = {
 }
 
 module.exports = withTM({
-    ...withMDX(),
-    webpack5: true,
-    images: {
-        domains: ['liberapay.com'],
+	...withMDX(),
+	swcMinify: true,
+	webpack5: true,
+	images: {
+		domains: ['liberapay.com'],
     },
-    async headers() {
-        return [
-            {
-                source: "/(.*)",
-                headers: [
-                    {
-                        key: 'Access-Control-Allow-Origin',
-                        value: '*'
-                    }
-                ]
-            }
-        ]
-    }
+    experimental: {
+
+        styledComponents: true,
+    },
+	async headers() {
+		return [
+			{
+				source: '/(.*)',
+				headers: [
+					{
+						key: 'Access-Control-Allow-Origin',
+						value: '*',
+					},
+				],
+			},
+		];
+	},
 });

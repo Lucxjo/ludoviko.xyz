@@ -2,8 +2,8 @@
 
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from '../styles/Home.module.scss';
+import Image from 'next/image';
 import {
 	Box,
 	Heading,
@@ -11,13 +11,11 @@ import {
 	List,
 	Card,
 	Paragraph,
-	Avatar,
 } from '@dracula/dracula-ui';
 import en from '../lang/en';
 import ProjectCard from '../components/project-card';
 import LinkedListItem from '../components/linked-list-item';
 import { InferGetStaticPropsType } from 'next';
-import { stringify } from 'remark';
 
 export const getStaticProps = async () => {
 	const res = await fetch('https://api.ludoviko.ch/v1/');
@@ -200,8 +198,13 @@ export default function Home({
 							</LinkedListItem>
 							<LinkedListItem
 								isExternal
-								href="https://matrix.to/#/@ludoviko:saluton.cc">
-								[matrix]
+								href="https://matrix.to/#/@ludoviko_:matrix.org">
+								[matrix] DM
+							</LinkedListItem>
+							<LinkedListItem
+								isExternal
+								href="https://matrix.to/#/#ludos-space:matrix.org">
+								[matrix] Space
 							</LinkedListItem>
 							<LinkedListItem
 								isExternal

@@ -38,7 +38,7 @@ export default function Post({
   return (
 		<Layout>
 			<Head>
-				<title>Ludo's Blog | {postData.title}</title>
+				<title>Ludo&#39;s Blog | {postData.title}</title>
 				<meta
 					name="keywords"
 					content={`${postData.keywords}`}

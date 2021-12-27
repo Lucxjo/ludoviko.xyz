@@ -1,2 +1,24 @@
+/** @format */
+
 var _iub = _iub || [];
-_iub.csConfiguration = {"reloadOnConsent":true,"askConsentAtCookiePolicyUpdate":true,"consentOnContinuedBrowsing":false,"perPurposeConsent":true,"whitelabel":false,"lang":"en","siteId":2272083,"cookiePolicyId":11941817, "callback":{ "onConsentRead":timeRefresh(60000) }, "banner":{ "acceptButtonDisplay":true,"customizeButtonDisplay":true,"rejectButtonDisplay":true,"position":"float-top-center","acceptButtonColor":"#00c7f1","acceptButtonCaptionColor":"white","customizeButtonColor":"#212121","customizeButtonCaptionColor":"white","rejectButtonColor":"#00c7f1","rejectButtonCaptionColor":"white","textColor":"white","backgroundColor":"#343746","listPurposes":true }};
+_iub.csConfiguration = {
+	invalidateConsentWithoutLog: true,
+	reloadOnConsent: true,
+	askConsentAtCookiePolicyUpdate: true,
+	consentOnContinuedBrowsing: false,
+	perPurposeConsent: true,
+	whitelabel: false,
+	lang: 'en',
+	siteId: 2272083,
+	enableRemoteConsent: true,
+	cookiePolicyId: 11941817,
+	callback: {},
+	banner: {
+		acceptButtonDisplay: true,
+		customizeButtonDisplay: true,
+		rejectButtonDisplay: true,
+		listPurposes: true,
+		position: 'float-bottom-right',
+		explicitWithdrawal: true,
+	},
+};

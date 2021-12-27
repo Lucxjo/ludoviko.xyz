@@ -10,3 +10,4 @@ dist/
 posts/open.md
 /.yarnrc.*
 /.env.*
+/out
