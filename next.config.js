@@ -24,12 +24,11 @@ module.exports = withTM({
 	swcMinify: true,
 	webpack5: true,
 	images: {
-		domains: ['liberapay.com'],
-    },
-    experimental: {
-
-        styledComponents: true,
-    },
+		domains: ['liberapay.com', 'cloudflare-ipfs.com'],
+	},
+	experimental: {
+		styledComponents: true,
+	},
 	async headers() {
 		return [
 			{

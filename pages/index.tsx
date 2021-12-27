@@ -62,7 +62,7 @@ export default function Home({
 						<Image
 							className="drac-avatar"
 							title={name}
-							src="/RingRingTechSupport.png"
+							src="https://cloudflare-ipfs.com/ipfs/QmVvWu3f2AegSd2bXz5X4vgj5XqmTXmarYTH4KASGhSF8j"
 							alt="My user picture"
 							width={90}
 							height={90}

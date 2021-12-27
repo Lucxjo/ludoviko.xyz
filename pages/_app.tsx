@@ -27,7 +27,7 @@ function App({ Component, pageProps }: AppProps) {
 					<meta property="og:type" content="website" key="og:type" />
 					<meta
 						property="og:image"
-						content="https://ludoviko.ch/RingRingTechSupport.png"
+						content="https://cloudflare-ipfs.com/ipfs/QmVvWu3f2AegSd2bXz5X4vgj5XqmTXmarYTH4KASGhSF8j"
 						key="og:img"
 					/>
 					<meta
