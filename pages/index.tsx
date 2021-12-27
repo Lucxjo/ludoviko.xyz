@@ -16,97 +16,167 @@ import {
 import en from '../lang/en';
 import ProjectCard from '../components/project-card';
 import LinkedListItem from '../components/linked-list-item';
-import { InferGetServerSidePropsType } from 'next';
+import { InferGetStaticPropsType } from 'next';
+import { stringify } from 'remark';
 
-export async function getServerSideProps() {
-	const res = await fetch('https://api.ludoviko.ch/v1/about/birthday/age');
-	const age = await res.json();
+export const getStaticProps = async () => {
+	const res = await fetch('https://api.ludoviko.ch/v1/');
+	const about = await res.json().then(data => data.about);
+	const age = about.birthday.age;
+	const { name, gender, sexuality, pronouns } = about;
+	const preferred = pronouns.preferred;
+
 	return {
 		props: {
+			name,
+			gender,
+			sexuality,
+			preferred,
 			age,
 		},
+		revalidate: 43200,
 	};
-}
+};
 
-export default function Home({ age }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const t = en
+export default function Home({
+	name,
+	gender,
+	sexuality,
+	preferred,
+	age,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+	const t = en;
 
-  return (
-    <div className={styles.container} data-target="#navbar" data-spy="scroll">
-      <Head>
-        <title>Ludoviko</title>
-      </Head>
+	return (
+		<div
+			className={styles.container}
+			data-target="#navbar"
+			data-spy="scroll">
+			<Head>
+				<title>{name}</title>
+			</Head>
 
-      <main className={styles.main}>
-        <Card color="pinkPurple" rounded="lg" p="md" mt="lg" mx="md" >
-          <span className="drac-avatar drac-bg-green-transparent drac-text-green drac-avatar-lg-stroke" style={{width: 95, height: 95}}>
-            <Image className="drac-avatar" title="Ludoviko" src="/RingRingTechSupport.png" alt="My user picture" width={90} height={90} />
-          </span>
-          <Heading as="h1" size="2xl" color="black" >Saluton!</Heading>
-          <Heading size="xl" color="black" >{t.welcome}</Heading>
-          <p></p>
-          <Link href="https://liberapay.com/Ludoviko/donate" passHref><Anchor><Image src="https://liberapay.com/assets/widgets/donate.svg" alt="Donate with Liberapay" width={90} height={30} /></Anchor></Link>
-        </Card>
-
-        <Card rounded="lg" p="md" m="md" color="blackSecondary" id="about" >
-          <Anchor href="/#about"></Anchor>
-          <Box className="list-display" >
-            <Heading as="h1" size="2xl" color="pinkPurple" >{t.about}</Heading>
-            <Heading size="lg" >So a bit about me:</Heading>
-            <List variant="unordered" color="pink" >
-						  <li className="drac-text drac-text-white" >Age: { age }</li>
-              <li className="drac-text drac-text-white" >Location: Europe</li>
-              <li className="drac-text drac-text-white" >Sexuality: Whatever it is, it isn't straight!</li>
-              <li className="drac-text drac-text-white" >Pronouns: He/him, they/them</li>
-              <li className="drac-text drac-text-white" >Gender: Male-ish</li>
-              <li className="drac-text drac-text-white" >Languages: en-GB, es-ES, eo-EO</li>
-            </List>
-          </Box>
-        </Card>
-
-        <Card rounded="lg" p="md" m="md" color="blackSecondary" id="projects" >
-          <Anchor href="/#projects"></Anchor>
-          <Box className="list-display" >
-            <Heading as="h1" size="2xl" color="pinkPurple" m="md" >{t.projects}</Heading>
-            <ProjectCard
-              title="Vänner Bäst"
-              description="A website to promote the Netflix TV programme 'Young Royals'. Not seen it yet? You totally should, there's a link on this website that will take you straight to Netflix!"
-              link0="https://github.com/Lucxjo/friends-best"
-              link1="https://vannerba.st" />
-            <ProjectCard
-              title="Arbúcies"
-              description="A game project for the JVM written in Kotlin.
-                The game is a rewrite of a game made by TheCherno on YouTube,
-                this original project was made as a Java 2D game tutorial."
-              link0="https://github.com/Lucxjo/Arbucies"
-              link1="https://youtube.com/playlist?list=PLlrATfBNZ98eOOCk2fOFg7Qg5yoQfFAdf"
-              link1Text="Original Playlist" />
-            <ProjectCard
-              title="Minecraft Projects"
-              description="I have a couple of Minecraft mods, these can be found on a different page. Click the link below to view them!
-                I also have a server, this can be found on the same page as the mods at the bottom.
-                The server link will jump you straight to that section!"
-              link0="/mc/#mods"
-              link0Text="Mods"
-              link0Ext={false}
-              link1='/mc/#server'
-              link1Text="Server"
-              link1Ext={false} />
-            <ProjectCard
-              title="Ludoviko.xyz/Ludoviko.ch"
-              description="This website! Technically it is one of my projects, so it deserves to be in this list. Right?
-                Built in Next.js with Dracuala theming from the Dracula UI kit."
-              link0="https://github.com/Lucxjo/ludoviko.xyz" />
-          </Box>
-        </Card>
+			<main className={styles.main}>
+				<Card color="pinkPurple" rounded="lg" p="md" mt="lg" mx="md">
+					<span
+						className="drac-avatar drac-bg-green-transparent drac-text-green drac-avatar-lg-stroke"
+						style={{ width: 95, height: 95 }}>
+						<Image
+							className="drac-avatar"
+							title={name}
+							src="/RingRingTechSupport.png"
+							alt="My user picture"
+							width={90}
+							height={90}
+						/>
+					</span>
+					<Heading as="h1" size="2xl" color="black">
+						Saluton!
+					</Heading>
+					<Heading size="xl" color="black">
+						{t.welcome}
+					</Heading>
+					<p></p>
+					<Link href="https://liberapay.com/Ludoviko/donate" passHref>
+						<Anchor>
+							<Image
+								src="https://liberapay.com/assets/widgets/donate.svg"
+								alt="Donate with Liberapay"
+								width={90}
+								height={30}
+							/>
+						</Anchor>
+					</Link>
+				</Card>
 
 				<Card
 					rounded="lg"
 					p="md"
 					m="md"
 					color="blackSecondary"
-					id="social"
-				>
+					id="about">
+					<Anchor href="/#about"></Anchor>
+					<Box className="list-display">
+						<Heading as="h1" size="2xl" color="pinkPurple">
+							{t.about}
+						</Heading>
+						<Heading size="lg">So a bit about me:</Heading>
+						<List variant="unordered" color="pink">
+							<li className="drac-text drac-text-white">
+								Age: {age}
+							</li>
+							<li className="drac-text drac-text-white">
+								Location: Europe
+							</li>
+							<li className="drac-text drac-text-white">
+								Sexuality: {sexuality}
+							</li>
+							<li className="drac-text drac-text-white">
+								Pronouns: {preferred}
+							</li>
+							<li className="drac-text drac-text-white">
+								Gender: {gender}
+							</li>
+							<li className="drac-text drac-text-white">
+								Languages: en-GB, es-ES, eo-EO
+							</li>
+						</List>
+					</Box>
+				</Card>
+
+				<Card
+					rounded="lg"
+					p="md"
+					m="md"
+					color="blackSecondary"
+					id="projects">
+					<Anchor href="/#projects"></Anchor>
+					<Box className="list-display">
+						<Heading as="h1" size="2xl" color="pinkPurple" m="md">
+							{t.projects}
+						</Heading>
+						<ProjectCard
+							title="Vänner Bäst"
+							description="A website to promote the Netflix TV programme 'Young Royals'. Not seen it yet? You totally should, there's a link on this website that will take you straight to Netflix!"
+							link0="https://github.com/Lucxjo/friends-best"
+							link1="https://vannerba.st"
+						/>
+						<ProjectCard
+							title="Arbúcies"
+							description="A game project for the JVM written in Kotlin.
+                The game is a rewrite of a game made by TheCherno on YouTube,
+                this original project was made as a Java 2D game tutorial."
+							link0="https://github.com/Lucxjo/Arbucies"
+							link1="https://youtube.com/playlist?list=PLlrATfBNZ98eOOCk2fOFg7Qg5yoQfFAdf"
+							link1Text="Original Playlist"
+						/>
+						<ProjectCard
+							title="Minecraft Projects"
+							description="I have a couple of Minecraft mods, these can be found on a different page. Click the link below to view them!
+                I also have a server, this can be found on the same page as the mods at the bottom.
+                The server link will jump you straight to that section!"
+							link0="/mc/#mods"
+							link0Text="Mods"
+							link0Ext={false}
+							link1="/mc/#server"
+							link1Text="Server"
+							link1Ext={false}
+						/>
+						<ProjectCard
+							title="Ludoviko.xyz/Ludoviko.ch"
+							description="This website! Technically it is one of my projects, so it deserves to be in this list. Right?
+                Built in Next.js with Dracuala theming from the Dracula UI kit."
+							link0="https://github.com/Lucxjo/ludoviko.xyz"
+						/>
+					</Box>
+				</Card>
+
+				<Card
+					rounded="lg"
+					p="md"
+					m="md"
+					color="blackSecondary"
+					id="social">
 					<Anchor href="/#social"></Anchor>
 					<Box className="list-display">
 						<Heading as="h1" size="2xl" color="pinkPurple">
@@ -120,26 +190,22 @@ export default function Home({ age }: InferGetServerSidePropsType<typeof getServ
 						<List variant="unordered" color="pink">
 							<LinkedListItem
 								href="https://mstdn.social/@Ludoviko"
-								rel="me"
-							>
+								rel="me">
 								Mastodon
 							</LinkedListItem>
 							<LinkedListItem
 								isExternal
-								href="https://github.com/Lucxjo"
-							>
+								href="https://github.com/Lucxjo">
 								GitHub
 							</LinkedListItem>
 							<LinkedListItem
 								isExternal
-								href="https://matrix.to/#/@ludoviko:saluton.cc"
-							>
+								href="https://matrix.to/#/@ludoviko:saluton.cc">
 								[matrix]
 							</LinkedListItem>
 							<LinkedListItem
 								isExternal
-								href="mailto:me@ludoviko.ch"
-							>
+								href="mailto:me@ludoviko.ch">
 								E-mail
 							</LinkedListItem>
 							<LinkedListItem href="/discord">
@@ -155,20 +221,17 @@ export default function Home({ age }: InferGetServerSidePropsType<typeof getServ
 							</li>
 							<LinkedListItem
 								isExternal
-								href="https://twitter.com/Ludoviko_"
-							>
+								href="https://twitter.com/Ludoviko_">
 								Twitter
 							</LinkedListItem>
 							<LinkedListItem
 								isExternal
-								href="https://www.twitch.tv/ludoviko_"
-							>
+								href="https://www.twitch.tv/ludoviko_">
 								Twitch.tv
 							</LinkedListItem>
 							<LinkedListItem
 								isExternal
-								href="https://pixelfed.de/Lucxjo"
-							>
+								href="https://pixelfed.de/Lucxjo">
 								Pixelfed
 							</LinkedListItem>
 						</List>
