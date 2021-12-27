@@ -1,41 +1,41 @@
-import Layout from '../../../components/layout'
-import Head from 'next/head'
-import { getAllPostIds, getPostData } from '../../../lib/posts'
-import { Box, Heading, Text, Paragraph } from '@dracula/dracula-ui'
-import { GetStaticProps, GetStaticPaths } from 'next'
+/** @format */
 
+import Layout from '../../../components/layout';
+import Head from 'next/head';
+import { getAllPostIds, getPostData } from '../../../lib/posts';
+import { Box, Heading, Text, Paragraph } from '@dracula/dracula-ui';
+import { GetStaticProps, GetStaticPaths } from 'next';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postData = await getPostData(params.id)
-  return {
-    props: {
-      postData
-    }
-  }
-}
+	const postData = await getPostData(params.id);
+	return {
+		props: {
+			postData,
+		},
+	};
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getAllPostIds()
-  return {
-    paths,
-    fallback: false
-  }
-}
+	const paths = getAllPostIds();
+	return {
+		paths,
+		fallback: false,
+	};
+};
 
 export default function Post({
-  postData
+	postData,
 }: {
-  postData: {
-    title: string
-    date: string
-    keywords: string
-    description: string
-    contentHtml: string
-    id: string
-  }
-}
-) {
-  return (
+	postData: {
+		title: string;
+		date: string;
+		keywords: string;
+		description: string;
+		contentHtml: string;
+		id: string;
+	};
+}) {
+	return (
 		<Layout>
 			<Head>
 				<title>Ludo&#39;s Blog | {postData.title}</title>
@@ -98,5 +98,5 @@ export default function Post({
 				/>
 			</Box>
 		</Layout>
-  );
+	);
 }
