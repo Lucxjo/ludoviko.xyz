@@ -8,6 +8,5 @@ dist/
 .next/
 .vercel
 posts/open.md
-/.yarnrc.*
 /.env.*
 /out
