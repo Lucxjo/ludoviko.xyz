@@ -6,7 +6,7 @@ export default function Discord() {
     return (
         <>
             <Head>
-                <title>Ludoviko.xyz | Discord</title>
+                <title>Ludoviko | Discord</title>
             </Head>
             <Card p="md" m="md" color="blackSecondary">
                 <Heading as="h1" size="2xl">Discord</Heading>
@@ -26,13 +26,6 @@ export default function Discord() {
                         This one is my server, I'm trying to build an inclusive community that is open to everyone. I'm hoping to do something a little different with this server, and I'm wanting to allow the community to have a very large say in how the server is run. I need more members though before I can implement this.
                     </Paragraph>
                     <Link href="https://discord.gg/UZRyJrEPTU" passHref><Anchor m="sm" color="pink">Join!</Anchor></Link>
-                </Card>
-                <Card variant="subtle" color="pink" m="sm" >
-                    <Heading size="lg" className="card-title" p="sm" >The Gay Lounge</Heading>
-                    <Paragraph m="sm" className="card-text">
-                        The Gay Lounge is another Discord server that I help run for a friend who is a streamer. The Gay Lounge is run by Tommy, who has built an inclusive community. Don't let the name fool you, not everyone in the server is LGBT+ and it isn't a requirement.
-                    </Paragraph>
-                    <Link href="https://discord.gg/vMcturZ" passHref><Anchor m="sm" color="pink">Join!</Anchor></Link>
                 </Card>
                 <Card variant="subtle" color="pink" m="sm" >
                     <Heading size="lg" className="card-title" p="sm" >Tesslin</Heading>

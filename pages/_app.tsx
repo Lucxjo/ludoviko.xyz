@@ -1,17 +1,39 @@
-import '../styles/globals.scss'
-import 'bootstrap/dist/css/bootstrap.css'
-import '@dracula/dracula-ui/styles/dracula-ui.css'
-import { AppProps } from 'next/app'
-import Navigation from '../components/nav'
-import Footer from '../components/footer'
-import Head from 'next/head'
-import PlausibleProvider from 'next-plausible'
+/** @format */
 
-function App({ Component, pageProps }: AppProps) {
-  return (
+import '../styles/globals.scss';
+import 'bootstrap/dist/css/bootstrap.css';
+import '@dracula/dracula-ui/styles/dracula-ui.css';
+import { AppProps } from 'next/app';
+import Navigation from '../components/nav';
+import Footer from '../components/footer';
+import Head from 'next/head';
+import PlausibleProvider from 'next-plausible';
+import { InferGetStaticPropsType } from 'next';
+
+export const getStaticProps = async () => {
+	const res = await fetch('https://api.ludoviko.ch/v1/');
+	const about = await res.json().then(data => data.about);
+	const age = about.birthday.age;
+	const { name, gender, sexuality, pronouns } = about;
+	const preferred = pronouns.preferred;
+
+	return {
+		props: {
+			name,
+		},
+		revalidate: 43200,
+	};
+};
+
+function App(
+	{ Component, pageProps }: AppProps,
+	{ name }: InferGetStaticPropsType<typeof getStaticProps>
+) {
+	return (
 		<>
 			<PlausibleProvider trackOutboundLinks={true} domain="ludoviko.xyz">
 				<Head>
+					<title>{name}</title>
 					<link rel="icon" href="/RingRingTechSupport.ico" />
 					<meta property="og:title" content="Ludoviko" key="title" />
 					<meta
@@ -58,7 +80,7 @@ function App({ Component, pageProps }: AppProps) {
 				<Footer />
 			</PlausibleProvider>
 		</>
-  );
+	);
 }
 
-export default App
+export default App;
