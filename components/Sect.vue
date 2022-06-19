@@ -32,7 +32,7 @@ export default {
 
 .section {
 	padding: 1rem;
-	margin: 1rem;
+	margin: 1.5rem;
 	width: 80%;
 	background-color: #5b5b5b;
 	border-radius: 1rem;

@@ -78,7 +78,7 @@ const projects = [
 	background-color: #0e5faa;
 	padding: 1rem;
 	border-radius: 1rem;
-	margin: 1rem;
+	margin: 2rem;
 	width: 80%;
 }
 </style>
