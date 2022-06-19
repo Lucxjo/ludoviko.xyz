@@ -1,5 +1,4 @@
 <template>
-    <h1>Ludoviko</h1>
     <div class="container">
         <div class="hero">
             <h1>Saluton!</h1>
