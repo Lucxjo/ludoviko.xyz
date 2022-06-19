@@ -5,9 +5,7 @@
             <h1>Saluton!</h1>
             <h2>Welcome to my website! I'm Ludoviko, rarely known as Luĉjo. I hope that you enjoy your stay here.</h2>
         </div>
-        <div class="card" id="about">
-            <h1>About</h1>
-            <h2>So a bit about me:</h2>
+        <Sect title="About" sub="So a bit about me:" id="about">
             <ul>
                 <li>Age: 22</li>
                 <li>Location: Europe</li>
@@ -16,12 +14,9 @@
                 <li>Gender: Male-ish</li>
                 <li>Languages: en-GB, es-ES, eo-EO</li>
             </ul>
-        </div>
+        </Sect>
     </div>
 </template>
-
-<script setup>
-</script>
 
 <style lang="scss" scoped>
 .hero {
