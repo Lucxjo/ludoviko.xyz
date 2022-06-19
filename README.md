@@ -1,2 +1,0 @@
-# ludoviko.xyz
-Personal website.
