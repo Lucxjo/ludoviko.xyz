@@ -1,21 +1,22 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
 
 :root {
-    background-color: #333333;
-    color: azure;
+	background-color: #333333;
+	color: azure;
 }
 
 * {
-    font-family: 'Montserrat', sans-serif !important;
+	font-family: "Montserrat", sans-serif !important;
 }
 
-h1, h2, h3 {
-    color: azure;
+h1,
+h2,
+h3 {
+	color: azure;
 }
 
 li {
-    font-size: large;
+	font-size: large;
 }
 
 .container {
