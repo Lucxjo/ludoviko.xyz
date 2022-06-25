@@ -2,7 +2,7 @@
 	<a
 		v-if="to.includes('http')"
 		target="_blank"
-		rel="nofollow noreferrer"
+		:rel="to.includes('mstdn') ? 'me' : 'nofollow noreferrer'"
 		:href="to"
 	>
 		<p>{{ title }} →</p>
