@@ -20,7 +20,7 @@
 		</div>
 		<Sect title="About" sub="So a bit about me:" id="about">
 			<ul>
-				<li>Age: {{age}}</li>
+				<li>Age: {{ age }}</li>
 				<li>Location: Europe</li>
 				<li>Sexuality: Whatever it is, it isn't straight!</li>
 				<li>Pronouns: they/them/theirs</li>
@@ -78,8 +78,9 @@
 </template>
 
 <script setup>
-const {data: age} = await useFetch('https://api.ludoviko.ch/v1/about/birthday/age')
-console.log(age)
+const { data: age } = await useFetch(
+	"https://api.ludoviko.ch/v1/about/birthday/age"
+);
 const projects = [
 	{
 		title: "VannerBasta",
