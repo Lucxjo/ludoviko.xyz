@@ -1,5 +1,10 @@
 {
   "private": true,
+  "packageManager": "pnpm@7.3.0",
+  "engines": {
+	"pnpm": "^7.3.0",
+	"node": "^18"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

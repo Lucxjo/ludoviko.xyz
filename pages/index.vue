@@ -1,12 +1,22 @@
 <template>
 	<div class="container">
 		<div class="hero">
-			<img src="/RingRingTechSupport.png" alt="My icon">
+			<img src="/RingRingTechSupport.png" alt="Ludoviko" />
 			<h1>Saluton!</h1>
 			<h2>
 				Welcome to my website! I'm Ludoviko, rarely known as Luĉjo. I
 				hope that you enjoy your stay here.
 			</h2>
+			<a
+				href="https://liberapay.com/Ludoviko/donate"
+				target="_blank"
+				rel="nofollow noreferrer"
+				><img
+					alt="Donate with Liberapay"
+					src="https://liberapay.com/assets/widgets/donate.svg"
+					decoding="async"
+					data-nimg="intrinsic"
+			/></a>
 		</div>
 		<Sect title="About" sub="So a bit about me:" id="about">
 			<ul>
@@ -28,6 +38,42 @@
 			>
 			</Card>
 		</Sect>
+		<Sect title="Social" id="social">
+			<p>
+				Here are the places that I spend my time on the internet. Feel
+				free to follow and chat on any of them!
+			</p>
+			<ul>
+				<li class="link">
+					<CLink
+						title="Mastodon"
+						to="https://mstdn.social/@Ludoviko"
+					/>
+				</li>
+				<li class="link">
+					<CLink title="GitHub" to="https://github.com/Lucxjo" />
+				</li>
+				<li class="link">
+					<CLink
+						title="Matrix DM"
+						to="https://matrix.to/#/@ludoviko_:matrix.org"
+					/>
+				</li>
+				<li class="link">
+					<CLink
+						title="Matrix Space"
+						to="https://matrix.to/#/#ludos-space:matrix.org"
+					/>
+				</li>
+				<li class="link">
+					<CLink title="E-mail" to="me@ludoviko.ch" />
+				</li>
+				<li class="link">
+					<CLink title="Twitter" to="https://twitter.com/Ludoviko_" />
+				</li>
+			</ul>
+			<p>Switch Friend code: SW-1092-1929-2801</p>
+		</Sect>
 	</div>
 </template>
 
@@ -40,12 +86,10 @@ const projects = [
 			{
 				title: "Source",
 				to: "https://github.com/Lucxjo/friends-best",
-				isExternal: true,
 			},
 			{
 				title: "View",
 				to: "https://vannerba.st/",
-				isExternal: true,
 			},
 		],
 	},
@@ -56,7 +100,6 @@ const projects = [
 			{
 				title: "Mods",
 				to: "/mc#mods",
-				isExternal: false,
 			},
 		],
 	},
@@ -67,7 +110,6 @@ const projects = [
 			{
 				title: "Source",
 				to: "https://github.com/Lucxjo/ludoviko.xyz",
-				isExternal: true,
 			},
 		],
 	},
@@ -78,13 +120,11 @@ const projects = [
 			{
 				title: "Source",
 				to: "https://github.com/Lucxjo/",
-				isExternal: true,
 			},
 			{
 				title: "Invite to your guild",
 				to: "https://discordapp.com/oauth2/authorize?client_id=944915663632355388&scope=bot&permissions=67454976",
-				isExternal: true
-			}
+			},
 		],
 	},
 ];

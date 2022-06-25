@@ -10,6 +10,7 @@ useHead({
 	titleTemplate: (title) => {
 		return title ? `${title} | Ludoviko` : "Ludoviko";
 	},
+	link: [{rel: 'icon', 'src': "/RingRingTechSupport.ico"}]
 });
 </script>
 
