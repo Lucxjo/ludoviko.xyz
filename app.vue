@@ -15,6 +15,42 @@ useHead({
 		return title ? `${title} | Ludoviko` : "Ludoviko";
 	},
 	link: [{ rel: "icon", src: "/RingRingTechSupport.ico" }],
+	meta: [
+		{ property: "og:title", content: "Ludoviko" },
+		{
+			name: "description",
+			content: "Ludoviko's little place on the internet",
+		},
+		{
+			property: "og:description",
+			content: "Ludoviko's little place on the internet",
+		},
+		{
+			property: "og:type",
+			content: "website",
+		},
+		{
+			property: "og:image",
+			content: "https://ludoviko.ch/RingRingTechSupport.png",
+		},
+		{
+			name: "keywords",
+			content:
+				"Ludoviko, Programming, Minecraft, Game Development, Java, Blog, Kotlin",
+		},
+		{
+			property: "twitter:card",
+			content: "summary",
+		},
+		{
+			property: "twitter:site",
+			content: "@Ludoviko_",
+		},
+		{
+			property: "twitter:creator",
+			content: "@Ludoviko_",
+		},
+	],
 });
 </script>
 

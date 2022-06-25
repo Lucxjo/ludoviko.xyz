@@ -27,3 +27,9 @@
 		</Sect>
 	</div>
 </template>
+
+<script setup>
+useHead({
+	title: "Privacy"
+})
+</script>

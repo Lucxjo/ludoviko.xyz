@@ -23,6 +23,9 @@
 </template>
 
 <script setup>
+useHead({
+	title: "Minecraft"
+})
 const kFabLinks = [
 	{
 		title: "Source",
