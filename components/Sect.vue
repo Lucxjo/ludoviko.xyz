@@ -1,7 +1,7 @@
 <template>
 	<div :id="id" class="section">
 		<h1>{{ title }}</h1>
-		<h2>{{ sub }}</h2>
+		<h2 v-if="sub">{{ sub }}</h2>
 		<slot></slot>
 	</div>
 </template>
@@ -15,7 +15,7 @@ export default {
 		},
 		sub: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		id: {
 			type: String,

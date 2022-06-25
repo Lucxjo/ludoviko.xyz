@@ -1,6 +1,7 @@
 <template>
 	<div class="container">
 		<div class="hero">
+			<img src="/RingRingTechSupport.png" alt="My icon">
 			<h1>Saluton!</h1>
 			<h2>
 				Welcome to my website! I'm Ludoviko, rarely known as Luĉjo. I
