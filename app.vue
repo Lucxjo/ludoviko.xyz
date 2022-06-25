@@ -1,8 +1,7 @@
 <template>
-	<div>
-		<h1><NuxtLink to="/">Ludoviko</NuxtLink></h1>
-		<NuxtPage />
-	</div>
+	<h1><NuxtLink to="/">Ludoviko</NuxtLink></h1>
+	<NuxtPage />
+	<footer>© 2020-2022 Ludoviko - The MIT License | <NuxtLink to="/privacy">Privacy</NuxtLink></footer>
 </template>
 
 <script setup>

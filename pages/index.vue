@@ -66,7 +66,7 @@
 					/>
 				</li>
 				<li class="link">
-					<CLink title="E-mail" to="me@ludoviko.ch" />
+					<CLink title="E-mail" to="mailto:me@ludoviko.ch" />
 				</li>
 				<li class="link">
 					<CLink title="Twitter" to="https://twitter.com/Ludoviko_" />

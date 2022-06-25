@@ -23,16 +23,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-a {
-	color: azure;
-	transition: color 0.15s ease, color 0.15s ease;
-}
-
-a:hover {
-	color: #39c4ff;
-	transition: color 0.15s ease, color 0.15s ease;
-}
-
 p {
 	max-width: fit-content !important;
 	margin: 0;
