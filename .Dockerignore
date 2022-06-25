@@ -1,9 +1,6 @@
-/.next
-/.vercel
-/.vscode
-/.well-known
+/.nuxt
 /node_modules
-/out
-/.env.local
-./index.html
-./yarn.lock
+/.editorconfig
+/.gitignore
+/README.md
+/.output
