@@ -70,6 +70,22 @@ const projects = [
 			},
 		],
 	},
+	{
+		title: "Diru (Discord Bot)",
+		desc: "A Discord translation bot built in Go with Disgord. You can translate using either the DeepL API or Google Translate.",
+		links: [
+			{
+				title: "Source",
+				to: "https://github.com/Lucxjo/",
+				isExternal: true,
+			},
+			{
+				title: "Invite to your guild",
+				to: "https://discordapp.com/oauth2/authorize?client_id=944915663632355388&scope=bot&permissions=67454976",
+				isExternal: true
+			}
+		],
+	},
 ];
 </script>
 
