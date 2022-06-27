@@ -16,7 +16,7 @@ COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN corepack enable 
 RUN corepack prepare pnpm@7.3.0 --activate
-RUN pnpm install && pnpm build
+RUN pnpm install --shamefully-hoist && pnpm build
 
 # Production image, copy all the files and run next
 FROM node:18-alpine AS runner
