@@ -29,5 +29,5 @@ COPY --from=builder /app/.output ./
 
 EXPOSE 3000
 
-CMD ["node", "./server/index.mjs"]
+CMD ["pnpm", "start"]
 LABEL org.opencontainers.image.source https://github.com/Lucxjo/ludoviko.xyz
