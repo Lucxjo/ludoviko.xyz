@@ -1,33 +1,22 @@
-# Install dependencies only when needed
-FROM node:18-alpine AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-COPY package.json pnpm-lock.yaml .npmrc ./
-RUN corepack enable 
-RUN corepack prepare pnpm@7.3.0 --activate
-RUN pnpm install --shamefully-hoist
+# Dockerfile
+FROM node:17-alpine
 
-# Rebuild the source code only when needed
-FROM node:18-alpine AS builder
-ENV NPM_TOKEN=${NPM_TOKEN}
-WORKDIR /app
-COPY . .
-COPY --from=deps /app/node_modules ./node_modules
-RUN corepack enable 
-RUN corepack prepare pnpm@7.3.0 --activate
-RUN pnpm install --shamefully-hoist && pnpm build
+# create destination directory
+RUN mkdir -p /usr/src/nuxt-app
+WORKDIR /usr/src/nuxt-app
 
-# Production image, copy all the files and run next
-FROM node:18-alpine AS runner
-WORKDIR /app
+# update and install dependency
+RUN apk update && apk upgrade
+RUN apk add git
 
-ENV NODE_ENV production
-
-# You only need to copy next.config.js if you are NOT using the default configuration
-COPY --from=builder /app/.output ./
+# copy the app, note .dockerignore
+COPY . /usr/src/nuxt-app/
+RUN yarn install
+RUN yarn build
 
 EXPOSE 3000
 
-CMD ["pnpm", "start"]
-LABEL org.opencontainers.image.source https://github.com/Lucxjo/ludoviko.xyz
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
+
+CMD [ "yarn", "start" ]
