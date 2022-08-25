@@ -9,7 +9,7 @@ RUN mkdir -p /usr/src/nuxt-app
 WORKDIR /usr/src/nuxt-app
 COPY package.json pnpm-lock.yaml .npmrc ./
 RUN corepack enable 
-RUN corepack prepare pnpm@7.3.0 --activate
+RUN corepack prepare pnpm@7.9.5 --activate
 RUN pnpm install --shamefully-hoist
 
 # update and install dependency
