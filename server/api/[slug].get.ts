@@ -6,7 +6,6 @@ export default defineEventHandler(async ({ req, res, context }) => {
 			slug: context.params.slug,
 		},
 	});
-	console.log(data);
 	res.setHeader("Content-Type", "application/json");
 
 	if (!data) {
