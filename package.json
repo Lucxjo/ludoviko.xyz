@@ -8,7 +8,7 @@
 	},
 	"scripts": {
 		"build": "nuxt build",
-		"dev": "nuxt dev",
+		"dev": "NODE_ENV=development nuxt dev",
 		"start": "nuxt start",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
