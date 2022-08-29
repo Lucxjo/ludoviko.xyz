@@ -7,7 +7,13 @@ export default defineEventHandler(async ({ req, res, context }) => {
 		},
 	});
 	console.log(data);
-	res.statusCode = 200;
 	res.setHeader("Content-Type", "application/json");
-	return data ?? { id: null, createdAt: null, slug: null, url: null };
+
+	if (!data) {
+		res.statusCode = 404;
+		return JSON.stringify({ message: "Error: not found", data: null });
+	} else {
+		res.statusCode = 200;
+		return JSON.stringify({ message: "Success", data });
+	}
 });
