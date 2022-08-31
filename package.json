@@ -4,7 +4,7 @@
 	"type": "module",
 	"engines": {
 		"pnpm": "7.9.5",
-		"node": "^18"
+		"node": "lts/gallium"
 	},
 	"scripts": {
 		"build": "nuxt build",
@@ -20,6 +20,10 @@
 	},
 	"dependencies": {
 		"@prisma/client": "4.2.1",
-		"sass": "1.54.5"
+		"@trpc/client": "9.27.2",
+		"@trpc/server": "9.27.2",
+		"sass": "1.54.5",
+		"trpc-nuxt": "0.2.6",
+		"zod": "3.18.0"
 	}
 }

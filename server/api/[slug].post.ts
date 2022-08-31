@@ -1,3 +1,5 @@
+import { prisma } from "~/src/db/client";
+
 export default defineEventHandler(async (event) => {
 	const { req, res, context } = event;
 	const body: {
@@ -48,8 +50,9 @@ export default defineEventHandler(async (event) => {
 		});
 	} else if (data && body.url && !body.update) {
 		return JSON.stringify({
-			message: "Error: 'update' field is false and there is already a link with this slug",
-			existingURL: data.url
+			message:
+				"Error: 'update' field is false and there is already a link with this slug",
+			existingURL: data.url,
 		});
 	} else {
 		return JSON.stringify({

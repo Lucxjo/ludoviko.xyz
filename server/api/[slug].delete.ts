@@ -1,3 +1,5 @@
+import { prisma } from "~/src/db/client";
+
 export default defineEventHandler(async (event) => {
 	event.res.setHeader("Content-Type", "application/json");
 
