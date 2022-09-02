@@ -1,27 +1,29 @@
 {
 	"private": true,
-	"packageManager": "pnpm@7.3.0",
 	"type": "module",
-	"engines": {
-		"pnpm": "7.9.5",
-		"node": "lts/gallium"
-	},
 	"scripts": {
 		"build": "nuxt build",
 		"dev": "NODE_ENV=development nuxt dev",
 		"start": "nuxt start",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
-		"db:push": "prisma db push"
+		"db:push": "prisma db push",
+		"test:coverage": "vitest run --coverage",
+		"test": "vitest"
 	},
 	"devDependencies": {
+		"@nuxt/test-utils-edge": "3.0.0-rc.9-27702110.abd5dc5",
+		"@types/jsonwebtoken": "8.5.9",
+		"@vitest/coverage-c8": "0.22.1",
 		"nuxt": "3.0.0-rc.8",
-		"prisma": "4.2.1"
+		"prisma": "4.3.1",
+		"vitest": "0.22.1"
 	},
 	"dependencies": {
-		"@prisma/client": "4.2.1",
+		"@prisma/client": "4.3.1",
 		"@trpc/client": "9.27.2",
 		"@trpc/server": "9.27.2",
+		"jsonwebtoken": "8.5.1",
 		"sass": "1.54.5",
 		"trpc-nuxt": "0.2.6",
 		"zod": "3.18.0"

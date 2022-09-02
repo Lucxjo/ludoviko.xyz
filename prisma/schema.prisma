@@ -11,10 +11,20 @@ datasource db {
 }
 
 model ShortLink {
-	id		Int @id @default(autoincrement())
-	createdAt	DateTime @default(now())
-	url		String @db.VarChar(2000)
-	slug		String @unique
+  id        String      @id @default(uuid())
+  createdAt DateTime @default(now())
+  url       String   @db.VarChar(2000)
+  slug      String   @unique
+  owner     User?    @relation(fields: [ownerId], references: [id])
+  ownerId   String?
 
-	@@index([slug])
+  @@index([slug])
+}
+
+model User {
+  id        String      @id @default(uuid())
+  createdAt DateTime    @default(now())
+  username  String      @unique
+  password  String
+  shorts    ShortLink[]
 }
