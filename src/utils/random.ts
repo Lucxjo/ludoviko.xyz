@@ -14,9 +14,7 @@ export class Random {
 		return str;
 	}
 
-	static generateRandomNumber(opts: {
-		length?: number;
-	}): number {
+	static generateRandomNumber(opts: { length?: number }): number {
 		let str = "";
 		for (let i = 0; i < (opts.length ?? 8); i++) {
 			str += Math.floor(Math.random() * 10);
@@ -24,5 +22,4 @@ export class Random {
 
 		return parseInt(str);
 	}
-
 }
