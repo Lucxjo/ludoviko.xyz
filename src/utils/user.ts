@@ -17,11 +17,14 @@ export enum UserError {
 	INCORRECT_PASSWORD = "INCORRECT_PASSWORD",
 	UNKNOWN_DATABASE_ERROR = "UNKNOWN_DATABASE_ERROR",
 	TOKEN_INVALID = "TOKEN_INVALID",
+	PASSWORD_LENGTH = "PASSWORD_LENGTH",
 }
 
 export default class UserUtils {
-
 	static async hashPassword(password: string): Promise<string> {
+		if (!password || password.length < 8) {
+			throw new Error(UserError.PASSWORD_LENGTH);
+		}
 		return await bcrypt.hash(password, 10);
 	}
 
@@ -205,6 +208,9 @@ export default class UserUtils {
 		password: string,
 		hash: string
 	): Promise<boolean> {
+		if (!password || password.length < 8) {
+			throw new Error(UserError.PASSWORD_LENGTH);
+		}
 		return bcrypt.compare(password, hash);
 	}
 
@@ -212,11 +218,17 @@ export default class UserUtils {
 		id: string;
 		username: string;
 	}): Promise<Token> {
-		if (process.env.JWT_SECRET === undefined) throw new Error("No JWT secret");
+		if (process.env.JWT_SECRET === undefined)
+			throw new Error("No JWT secret");
 		const { id, username } = user;
-		const token = jwt.sign({ id, username }, process.env.JWT_SECRET ?? (process.env.NODE_ENV === 'test' ? "testingKey" : 'Error'), {
-			expiresIn: `${EXPIRY_IN_DAYS}d`,
-		});
+		const token = jwt.sign(
+			{ id, username },
+			process.env.JWT_SECRET ??
+				(process.env.NODE_ENV === "test" ? "testingKey" : "Error"),
+			{
+				expiresIn: `${EXPIRY_IN_DAYS}d`,
+			}
+		);
 		return { token, expiryInDays: EXPIRY_IN_DAYS };
 	}
 

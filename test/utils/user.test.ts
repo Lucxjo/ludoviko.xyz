@@ -21,23 +21,19 @@ describe("test user util functions", () => {
 			expect(await UserUtils.validatePassword(str, hash)).toBe(true);
 		}
 
+		// @ts-ignore:2554
+		await expect(UserUtils.hashPassword()).rejects.toThrow(
+			"PASSWORD_LENGTH"
+		);
+
+		// @ts-ignore:2554
+		await expect(UserUtils.validatePassword()).rejects.toThrow(
+			"PASSWORD_LENGTH"
+		);
+
 		const hash = await UserUtils.hashPassword("password");
 		expect(await UserUtils.hashPassword("password")).toMatch("$2b$10$");
 		expect(await UserUtils.validatePassword("password", hash)).toBe(true);
-	});
-
-	test("test token generation", async () => {
-		testToken = await UserUtils.generateToken({
-			id: testUser.id,
-			username: testUser.username,
-		});
-		expect(testToken).toBeDefined();
-	});
-
-	test("test token validation", async () => {
-		expect(await UserUtils.getUserFromToken(testToken.token)).toStrictEqual(
-			{ id: testUser.id, username: testUser.username }
-		);
 	});
 });
 
@@ -59,11 +55,17 @@ if (process.env.LOCAL == "true") {
 		});
 
 		test("test login function", async () => {
-			let user = await UserUtils.loginUser(testUser.username, testUser.password + "1");
+			let user = await UserUtils.loginUser(
+				testUser.username,
+				testUser.password + "1"
+			);
 			expect(user.success).toBe(false);
 			expect(user.error).toBe("INCORRECT_PASSWORD");
 
-			user = await UserUtils.loginUser(testUser.username + "1", testUser.password);
+			user = await UserUtils.loginUser(
+				testUser.username + "1",
+				testUser.password
+			);
 			expect(user.success).toBe(false);
 			expect(user.error).toBe("USER_NOT_FOUND");
 
@@ -95,5 +97,19 @@ if (process.env.LOCAL == "true") {
 			expect(user.success).toBe(false);
 			expect(user.error).toBe("USER_NOT_FOUND");
 		});
+	});
+
+	test("test token generation", async () => {
+		testToken = await UserUtils.generateToken({
+			id: testUser.id,
+			username: testUser.username,
+		});
+		expect(testToken).toBeDefined();
+	});
+
+	test("test token validation", async () => {
+		expect(await UserUtils.getUserFromToken(testToken.token)).toStrictEqual(
+			{ id: testUser.id, username: testUser.username }
+		);
 	});
 }
