@@ -10,7 +10,17 @@ export type Token = {
 	expiryInDays: number;
 };
 
+export enum UserError {
+	USER_NOT_FOUND = "USER_NOT_FOUND",
+	USER_ALREADY_EXISTS = "USER_ALREADY_EXISTS",
+	USER_IN_DB = "USER_IN_DB",
+	INCORRECT_PASSWORD = "INCORRECT_PASSWORD",
+	UNKNOWN_DATABASE_ERROR = "UNKNOWN_DATABASE_ERROR",
+	TOKEN_INVALID = "TOKEN_INVALID",
+}
+
 export default class UserUtils {
+
 	static async hashPassword(password: string): Promise<string> {
 		return await bcrypt.hash(password, 10);
 	}
@@ -34,70 +44,77 @@ export default class UserUtils {
 		};
 
 		const hashedPassword = await UserUtils.hashPassword(password);
+		let user = await prisma.user.findUnique({ where: { username } });
 
-		// Allow many test users to be created
-		if (process.env.NODE_ENV === "test" || "development") {
-			try {
-				await prisma.user.create({
-					data: {
-						username: username,
-						password: hashedPassword,
-					},
-				});
-
-				await prisma.user
-					.findUnique({
-						where: {
-							username,
-						},
-						select: {
-							id: true,
-							username: true,
-						},
-					})
-					.then((user) => {
-						out.id = user?.id;
-						out.username = user?.username;
-						out.success = true;
-					})
-					.catch((e) => {
-						out.error = e;
-						out.success = false;
-					});
-			} catch (e) {
-				console.error(e);
-				out.success = false;
-			}
-
-			const user = await prisma.user.findUnique({
-				where: {
-					username: username,
-				},
-			});
-			console.log(user);
-		} else {
-			const users = await prisma.user.findMany();
-			const hashedPassword = await UserUtils.hashPassword(password);
-			// Only allow one user to be created in production
-			if (users.length === 0) {
-				await prisma.user
-					.create({
+		if (!user) {
+			// Allow many test users to be created
+			if (process.env.NODE_ENV === "test" || "development") {
+				try {
+					await prisma.user.create({
 						data: {
 							username: username,
 							password: hashedPassword,
 						},
-					})
-					.then(async () => {
-						out.success = true;
-					})
-					.catch((e) => {
-						out.success = false;
-						out.error = e;
 					});
+
+					await prisma.user
+						.findUnique({
+							where: {
+								username,
+							},
+							select: {
+								id: true,
+								username: true,
+							},
+						})
+						.then((user) => {
+							out.id = user?.id;
+							out.username = user?.username;
+							out.success = true;
+						})
+						.catch((e) => {
+							out.error = e;
+							out.success = false;
+						});
+				} catch (e) {
+					console.error(e);
+					out.success = false;
+				}
+
+				user = await prisma.user.findUnique({
+					where: {
+						username: username,
+					},
+				});
+				console.log(user);
 			} else {
-				out.success = false;
-				out.error = "There is already a user in the database";
+				const users = await prisma.user.findMany();
+				const hashedPassword = await UserUtils.hashPassword(password);
+				// Only allow one user to be created in production
+				if (users.length === 0) {
+					await prisma.user
+						.create({
+							data: {
+								username: username,
+								password: hashedPassword,
+							},
+						})
+						.then(async () => {
+							out.success = true;
+						})
+						.catch((e) => {
+							console.error(e);
+							out.success = false;
+							out.error = UserError.UNKNOWN_DATABASE_ERROR;
+						});
+				} else {
+					out.success = false;
+					out.error = UserError.USER_IN_DB;
+				}
 			}
+		} else {
+			out.success = false;
+			out.error = UserError.USER_ALREADY_EXISTS;
 		}
 		return out;
 	}
@@ -134,11 +151,11 @@ export default class UserUtils {
 				}
 			} else if (!valid_password) {
 				output.success = false;
-				output.error = "Invalid password";
+				output.error = UserError.INCORRECT_PASSWORD;
 			}
 		} else {
 			output.success = false;
-			output.error = "User does not exist";
+			output.error = UserError.USER_NOT_FOUND;
 		}
 		return output;
 	}
@@ -168,16 +185,17 @@ export default class UserUtils {
 						out.token = token;
 					})
 					.catch((e) => {
+						console.error(e);
 						out.success = false;
-						out.error = `Error generating token: ${e}`;
+						out.error = UserError.TOKEN_INVALID;
 					});
 			} else {
 				out.success = false;
-				out.error = "Invalid password";
+				out.error = UserError.INCORRECT_PASSWORD;
 			}
 		} else {
 			out.success = false;
-			out.error = "User does not exist";
+			out.error = UserError.USER_NOT_FOUND;
 		}
 
 		return out;
@@ -210,7 +228,7 @@ export default class UserUtils {
 			return { id, username };
 		} catch (error) {
 			console.error(error);
-			return undefined;
+			throw new Error(UserError.TOKEN_INVALID);
 		}
 	}
 }

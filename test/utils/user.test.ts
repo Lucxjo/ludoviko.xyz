@@ -44,15 +44,30 @@ describe("test user util functions", () => {
 if (process.env.LOCAL == "true") {
 	describe("test user auth functions", () => {
 		test("test createUser function", async () => {
-			const user = await UserUtils.createUser(
+			let user = await UserUtils.createUser(
 				testUser.username,
 				testUser.password
 			);
 			expect(user.success).toBe(true);
+
+			user = await UserUtils.createUser(
+				testUser.username,
+				testUser.password
+			);
+			expect(user.success).toBe(false);
+			expect(user.error).toBe("USER_ALREADY_EXISTS");
 		});
 
 		test("test login function", async () => {
-			const user = await UserUtils.loginUser(
+			let user = await UserUtils.loginUser(testUser.username, testUser.password + "1");
+			expect(user.success).toBe(false);
+			expect(user.error).toBe("INCORRECT_PASSWORD");
+
+			user = await UserUtils.loginUser(testUser.username + "1", testUser.password);
+			expect(user.success).toBe(false);
+			expect(user.error).toBe("USER_NOT_FOUND");
+
+			user = await UserUtils.loginUser(
 				testUser.username,
 				testUser.password
 			);
@@ -65,7 +80,7 @@ if (process.env.LOCAL == "true") {
 				testUser.password + "1"
 			);
 			expect(user.success).toBe(false);
-			expect(user.error).toBe("Invalid password");
+			expect(user.error).toBe("INCORRECT_PASSWORD");
 
 			user = await UserUtils.deleteUser(
 				testUser.username,
@@ -78,7 +93,7 @@ if (process.env.LOCAL == "true") {
 				testUser.password
 			);
 			expect(user.success).toBe(false);
-			expect(user.error).toBe("User does not exist");
+			expect(user.error).toBe("USER_NOT_FOUND");
 		});
 	});
 }
