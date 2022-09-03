@@ -212,8 +212,9 @@ export default class UserUtils {
 		id: string;
 		username: string;
 	}): Promise<Token> {
+		if (process.env.JWT_SECRET === undefined) throw new Error("No JWT secret");
 		const { id, username } = user;
-		const token = jwt.sign({ id, username }, process.env.JWT_SECRET!, {
+		const token = jwt.sign({ id, username }, process.env.JWT_SECRET ?? (process.env.NODE_ENV === 'test' ? "testingKey" : 'Error'), {
 			expiresIn: `${EXPIRY_IN_DAYS}d`,
 		});
 		return { token, expiryInDays: EXPIRY_IN_DAYS };
