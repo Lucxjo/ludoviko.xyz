@@ -2,6 +2,17 @@ import { describe, expect, test } from "vitest";
 import UserUtils from "../../src/utils/user";
 import { Random } from "../../src/utils/random";
 
+const testUser = {
+	id: "123",
+	username: "test",
+	password: Random.generateRandomString({ length: 10 }),
+};
+
+let testToken = {
+	token: "",
+	expiryInDays: 0,
+};
+
 describe("test user util functions", () => {
 	test("test validate function", async () => {
 		for (let i = 0; i < 16; i++) {
@@ -9,5 +20,65 @@ describe("test user util functions", () => {
 			const hash = await UserUtils.hashPassword(str);
 			expect(await UserUtils.validatePassword(str, hash)).toBe(true);
 		}
+
+		const hash = await UserUtils.hashPassword("password");
+		expect(await UserUtils.hashPassword("password")).toMatch("$2b$10$");
+		expect(await UserUtils.validatePassword("password", hash)).toBe(true);
+	});
+
+	test("test token generation", async () => {
+		testToken = await UserUtils.generateToken({
+			id: testUser.id,
+			username: testUser.username,
+		});
+		expect(testToken).toBeDefined();
+	});
+
+	test("test token validation", async () => {
+		expect(await UserUtils.getUserFromToken(testToken.token)).toStrictEqual(
+			{ id: testUser.id, username: testUser.username }
+		);
 	});
 });
+
+if (process.env.LOCAL == "true") {
+	describe("test user auth functions", () => {
+		test("test createUser function", async () => {
+			const user = await UserUtils.createUser(
+				testUser.username,
+				testUser.password
+			);
+			expect(user.success).toBe(true);
+		});
+
+		test("test login function", async () => {
+			const user = await UserUtils.loginUser(
+				testUser.username,
+				testUser.password
+			);
+			expect(user.success).toBe(true);
+		});
+
+		test("test deleteUser function", async () => {
+			let user = await UserUtils.deleteUser(
+				testUser.username,
+				testUser.password + "1"
+			);
+			expect(user.success).toBe(false);
+			expect(user.error).toBe("Invalid password");
+
+			user = await UserUtils.deleteUser(
+				testUser.username,
+				testUser.password
+			);
+			expect(user.success).toBe(true);
+
+			user = await UserUtils.deleteUser(
+				testUser.username,
+				testUser.password
+			);
+			expect(user.success).toBe(false);
+			expect(user.error).toBe("User does not exist");
+		});
+	});
+}

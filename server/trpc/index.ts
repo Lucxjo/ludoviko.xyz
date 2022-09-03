@@ -3,7 +3,7 @@ import { z } from "zod";
 import { prisma } from "~/src/db/client";
 import { Random } from "~~/src/utils/random";
 import bcrypt from "bcrypt";
-import UserUtils from "~~/src/utils/user";
+import UserUtils, { Token } from "~~/src/utils/user";
 
 export const router = trpcRouter()
 	.query("getSlugData", {
@@ -111,60 +111,11 @@ export const router = trpcRouter()
 			error: z.any().optional(),
 		}),
 		async resolve({ input }) {
-			let out: { success: boolean; error?: any } = {
-				success: false,
-			};
-
-			const hashedPassword = await UserUtils.hashPassword(input.password);
-
-			// Allow many test users to be created
-			if (process.env.NODE_ENV === "test" || "development") {
-				try {
-					await prisma.user.create({
-						data: {
-							username: input.username,
-							password: hashedPassword,
-						},
-					});
-					out.success = true;
-				} catch (e) {
-					console.error(e);
-					out.success = false;
-				}
-
-				const user = await prisma.user.findUnique({
-					where: {
-						username: input.username,
-					},
-				});
-				console.log(user);
-			} else {
-				const users = await prisma.user.findMany();
-				const hashedPassword = await UserUtils.hashPassword(
-					input.password
-				);
-				// Only allow one user to be created in production
-				if (users.length === 0) {
-					await prisma.user
-						.create({
-							data: {
-								username: input.username,
-								password: hashedPassword,
-							},
-						})
-						.then(async () => {
-							out.success = true;
-						})
-						.catch((e) => {
-							out.success = false;
-							out.error = e;
-						});
-				} else {
-					out.success = false;
-					out.error = "There is already a user in the database";
-				}
-			}
-			return out;
+			const user = await UserUtils.createUser(
+				input.username,
+				input.password
+			);
+			return { success: user.success, error: user.error };
 		},
 	})
 	.mutation("loginUser", {
@@ -175,25 +126,20 @@ export const router = trpcRouter()
 		output: z.object({
 			success: z.boolean(),
 			error: z.any().optional(),
-			token: z.string().optional(),
+			token: z.any().optional(),
 		}),
 		async resolve({ input }) {
-			const user = await prisma.user.findUnique({
-				where: {
-					username: input.username,
-				},
-			});
-
-			if (user) {
-				const isPasswordValid = await UserUtils.validatePassword(
-					input.password,
-					user.password
-				);
-				if (isPasswordValid) {
-				} else return { success: false, error: "Invalid password" };
-			} else {
-				return { success: false, error: "User does not exist" };
-			}
+			const { success, error, token } = await UserUtils.loginUser(
+				input.username,
+				input.password
+			);
+			return {
+				success,
+				error,
+				token: token
+					? { token: token!.token, expiryInDays: token!.expiryInDays }
+					: undefined,
+			};
 		},
 	})
 	.mutation("deleteUser", {
@@ -206,38 +152,11 @@ export const router = trpcRouter()
 			error: z.any().optional(),
 		}),
 		async resolve({ input }) {
-			let output: { success: boolean; error?: any } = { success: false };
-
-			const user = await prisma.user.findUnique({
-				where: {
-					username: input.username,
-				},
-			});
-			if (user) {
-				const valid_password = await UserUtils.validatePassword(
-					input.password,
-					user.password
-				);
-
-				if (user && valid_password) {
-					try {
-						await prisma.user.delete({
-							where: {
-								username: input.username,
-							},
-						});
-						output.success = true;
-					} catch (e) {
-						console.error(e);
-						output.success = false;
-						output.error = e;
-					}
-				}
-			} else {
-				output.success = false;
-				output.error = "User does not exist";
-			}
-			return output;
+			const { success, error } = await UserUtils.deleteUser(
+				input.username,
+				input.password
+			);
+			return { success, error };
 		},
 	});
 
