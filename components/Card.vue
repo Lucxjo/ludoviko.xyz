@@ -8,27 +8,21 @@
 	</div>
 </template>
 
-<script>
-import CLink from './CLink.vue';
-const Card = resolveComponent("Card");
-
-export default {
-    props: {
-        title: {
-            type: String,
-            required: true,
-        },
-        desc: {
-            type: String,
-            required: true,
-        },
-        links: {
-            type: Array,
-            required: true,
-        },
-    },
-    components: { CLink }
-};
+<script setup>
+defineProps({
+	title: {
+		type: String,
+		required: true,
+	},
+	desc: {
+		type: String,
+		required: true,
+	},
+	links: {
+		type: Array,
+		required: true,
+	},
+});
 </script>
 
 <style lang="scss" scoped>

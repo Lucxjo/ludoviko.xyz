@@ -20,7 +20,7 @@
 		</div>
 		<Sect title="About" sub="So a bit about me:" id="about">
 			<ul>
-				<li>Age: {{ age }}</li>
+				<li>Age: {{ age || 23 }}</li>
 				<li>Location: Europe</li>
 				<li>Sexuality: Whatever it is, it isn't straight!</li>
 				<li>Pronouns: they/them/theirs</li>
@@ -31,7 +31,7 @@
 		<Sect title="Projects" sub="" id="projects">
 			<Card
 				v-for="project in projects"
-				:key="project.title"
+				v-bind:key="project.title"
 				:title="project.title"
 				:desc="project.desc"
 				:links="project.links"
@@ -46,7 +46,13 @@
 			<ul>
 				<li class="link">
 					<CLink
-						title="Mastodon"
+						title="Mastodon (main)"
+						to="https://masto.nu/@Ludoviko"
+					/>
+				</li>
+				<li class="link">
+					<CLink
+						title="Mastodon (backup)"
 						to="https://mstdn.social/@Ludoviko"
 					/>
 				</li>

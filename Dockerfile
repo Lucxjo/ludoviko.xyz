@@ -1,5 +1,5 @@
 # Dockerfile
-FROM node:18-alpine
+FROM node:16-alpine
 
 RUN apk add --no-cache libc6-compat
 
@@ -7,10 +7,8 @@ RUN apk add --no-cache libc6-compat
 RUN mkdir -p /usr/src/nuxt-app
 
 WORKDIR /usr/src/nuxt-app
-COPY package.json pnpm-lock.yaml .npmrc ./
-RUN corepack enable 
-RUN corepack prepare pnpm@7.9.5 --activate
-RUN pnpm install --shamefully-hoist
+COPY package.json .npmrc ./
+RUN yarn install
 
 # update and install dependency
 RUN apk update && apk upgrade
@@ -18,13 +16,13 @@ RUN apk add git
 
 # copy the app, note .dockerignore
 COPY . /usr/src/nuxt-app/
-RUN pnpm install
-RUN pnpm build
+RUN yarn install
+RUN yarn build
 
 EXPOSE 3000
 
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=3000
 
-CMD ["pnpm", "start"]
+CMD ["yarn", "start"]
 LABEL org.opencontainers.image.source https://github.com/Lucxjo/ludoviko.xyz
