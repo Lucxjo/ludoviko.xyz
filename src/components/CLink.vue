@@ -1,34 +1,34 @@
 <template>
 	<a
-		v-if="props.to.includes('http')"
+		v-if="p.to.includes('http')"
 		target="_blank"
-		:rel="to.includes('masto') ? 'me' : 'nofollow noreferrer'"
+		:rel="p.to.includes('masto') ? 'me' : 'nofollow noreferrer'"
 		class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark"
-		:href="to"
+		:href="p.to"
 	>
-		<span>{{ title }}{{ props.arrow ? " →" : "" }}</span>
+		<span>{{ title }}{{ p.arrow ? " →" : "" }}</span>
 	</a>
 	<a
-		v-else-if="props.to.includes('mailto')"
+		v-else-if="p.to.includes('mailto')"
 		class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark"
-		:href="props.to"
+		:href="p.to"
 	>
-		<span>{{ title }}{{ props.arrow ? " →" : "" }}</span>
+		<span>{{ title }}{{ p.arrow ? " →" : "" }}</span>
 	</a>
 	<RouterLink
 		v-else
 		v-bind="$props"
 		class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark"
-		:to="props.to"
+		:to="p.to"
 	>
-		<span>{{ props.title }}{{ props.arrow ? " →" : "" }}</span>
+		<span>{{ p.title }}{{ p.arrow ? " →" : "" }}</span>
 	</RouterLink>
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-	title: { String, required: true },
-	to: { String, required: true },
-	arrow: { Boolean, default: true },
+const p = defineProps({
+	title: { type: String, required: true },
+	to: { type: String, required: true },
+	arrow: { type: Boolean, default: true },
 });
 </script>
