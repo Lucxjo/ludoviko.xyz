@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     CSect: typeof import('./src/components/CSect.vue')['default']
     CText: typeof import('./src/components/CText.vue')['default']
     HomeView: typeof import('./src/views/HomeView.vue')['default']
+    MCView: typeof import('./src/views/MCView.vue')['default']
     PrivacyView: typeof import('./src/views/PrivacyView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
