@@ -1,35 +1,34 @@
 <template>
 	<a
-		v-if="to.includes('http')"
+		v-if="props.to.includes('http')"
 		target="_blank"
 		:rel="to.includes('masto') ? 'me' : 'nofollow noreferrer'"
 		class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark"
 		:href="to"
 	>
-		<p>{{ title }} →</p>
+		<span>{{ title }}{{ props.arrow ? " →" : "" }}</span>
 	</a>
 	<a
-		v-else-if="to.includes('mailto')"
+		v-else-if="props.to.includes('mailto')"
 		class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark"
-		:href="to"
+		:href="props.to"
 	>
-		<p>{{ title }} →</p>
+		<span>{{ title }}{{ props.arrow ? " →" : "" }}</span>
 	</a>
 	<RouterLink
 		v-else
 		v-bind="$props"
 		class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark"
-		:to="to"
+		:to="props.to"
 	>
-		<p>{{ title }} →</p>
+		<span>{{ props.title }}{{ props.arrow ? " →" : "" }}</span>
 	</RouterLink>
 </template>
 
-<script>
-export default {
-	props: {
-		title: String,
-		to: String,
-	},
-};
+<script setup lang="ts">
+const props = defineProps({
+	title: { String, required: true },
+	to: { String, required: true },
+	arrow: { Boolean, default: true },
+});
 </script>
