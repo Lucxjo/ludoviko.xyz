@@ -115,7 +115,7 @@ const projects = [
 	},
 	{
 		title: "Ludoviko.xyz/Ludoviko.ch",
-		desc: "This website! Technically it is one of my projects, so it deserves to be in this list. Right? Built with NuxtJS.",
+		desc: "This website! Technically it is one of my projects, so it deserves to be in this list. Right? Built with VueJS 3 + Vite.",
 		links: [
 			{
 				title: "Source",
