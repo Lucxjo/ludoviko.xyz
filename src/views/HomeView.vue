@@ -1,12 +1,12 @@
 <template>
 	<div class="container">
-		<div class="hero">
+		<div class="p-5 m-11 rounded-2xl bg-blue shadow-lg dark:bg-blue-dark">
 			<img src="/RingRingTechSupport.png" alt="Ludoviko" />
-			<h1>Saluton!</h1>
-			<h2>
+			<CHeading weight="1" :hero="true">Saluton!</CHeading>
+			<CHeading :hero="true">
 				Welcome to my website! I'm Ludoviko, rarely known as Luĉjo. I
 				hope that you enjoy your stay here.
-			</h2>
+			</CHeading>
 			<a
 				href="https://liberapay.com/Ludoviko/donate"
 				target="_blank"
@@ -18,43 +18,36 @@
 					data-nimg="intrinsic"
 			/></a>
 		</div>
-		<Sect title="About" sub="So a bit about me:" id="about">
+		<CSect title="About" sub="So a bit about me:" id="about">
 			<ul>
-				<li>Age: {{ age || 23 }}</li>
-				<li>Location: Europe</li>
-				<li>Sexuality: Whatever it is, it isn't straight!</li>
-				<li>Pronouns: they/them/theirs</li>
-				<li>Gender: Male-ish</li>
-				<li>Languages: en-GB, es-ES, eo-EO</li>
+				<CText as="li">Age: {{ age || 23 }}</CText>
+				<CText as="li">Location: Europe</CText>
+				<CText as="li"
+					>Sexuality: Whatever it is, it isn't straight!</CText
+				>
+				<CText as="li">Pronouns: they/them/theirs</CText>
+				<CText as="li">Gender: Male-ish</CText>
+				<CText as="li">Languages: en-GB, es-ES, eo-EO</CText>
 			</ul>
-		</Sect>
-		<Sect title="Projects" sub="" id="projects">
-			<Card
+		</CSect>
+		<CSect title="Projects" sub="" id="projects">
+			<CCard
 				v-for="project in projects"
 				v-bind:key="project.title"
 				:title="project.title"
 				:desc="project.desc"
 				:links="project.links"
 			>
-			</Card>
-		</Sect>
-		<Sect title="Social" id="social">
-			<p>
+			</CCard>
+		</CSect>
+		<CSect title="Social" id="social">
+			<CText>
 				Here are the places that I spend my time on the internet. Feel
 				free to follow and chat on any of them!
-			</p>
+			</CText>
 			<ul>
 				<li class="link">
-					<CLink
-						title="Mastodon (main)"
-						to="https://masto.nu/@Ludoviko"
-					/>
-				</li>
-				<li class="link">
-					<CLink
-						title="Mastodon (backup)"
-						to="https://mstdn.social/@Ludoviko"
-					/>
+					<CLink title="Mastodon" to="https://masto.nu/@Ludoviko" />
 				</li>
 				<li class="link">
 					<CLink title="GitHub" to="https://github.com/Lucxjo" />
@@ -78,15 +71,23 @@
 					<CLink title="Twitter" to="https://twitter.com/Ludoviko_" />
 				</li>
 			</ul>
-			<p>Switch Friend code: SW-1092-1929-2801</p>
-		</Sect>
+			<CText>Switch Friend code: SW-1092-1929-2801</CText>
+		</CSect>
 	</div>
 </template>
 
-<script setup>
-const { data: age } = await useFetch(
-	"https://api.ludoviko.ch/v1/about/birthday/age"
-);
+<script setup lang="ts">
+let age: number | undefined = undefined;
+
+fetch("https://api.ludoviko.ch/v1/about/birthday/age")
+	.then((res) => res.json())
+	.then((data) => {
+		age = data.age;
+	})
+	.catch((err) => {
+		console.error(err);
+	});
+
 const projects = [
 	{
 		title: "VannerBasta",
@@ -138,13 +139,3 @@ const projects = [
 	},
 ];
 </script>
-
-<style lang="scss" scoped>
-.hero {
-	background-color: #0e5faa;
-	padding: 1rem;
-	border-radius: 1rem;
-	margin: 2rem;
-	width: 80%;
-}
-</style>
