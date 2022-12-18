@@ -46,29 +46,46 @@
 				free to follow and chat on any of them!
 			</CText>
 			<ul>
-				<li class="link">
-					<CLink title="Mastodon" to="https://masto.nu/@Ludoviko" />
-				</li>
-				<li class="link">
-					<CLink title="GitHub" to="https://github.com/Lucxjo" />
-				</li>
-				<li class="link">
+				<li>
 					<CLink
+						:me="true"
+						title="Mastodon"
+						to="https://masto.nu/@Ludoviko"
+					/>
+				</li>
+				<li>
+					<CLink
+						:me="true"
+						title="GitHub"
+						to="https://github.com/Lucxjo"
+					/>
+				</li>
+				<li>
+					<CLink
+						:me="true"
 						title="Matrix DM"
 						to="https://matrix.to/#/@ludoviko_:matrix.org"
 					/>
 				</li>
-				<li class="link">
+				<li>
 					<CLink
 						title="Matrix Space"
 						to="https://matrix.to/#/#ludos-space:matrix.org"
 					/>
 				</li>
-				<li class="link">
-					<CLink title="E-mail" to="mailto:me@ludoviko.ch" />
+				<li>
+					<CLink
+						:me="true"
+						title="E-mail"
+						to="mailto:me@ludoviko.ch"
+					/>
 				</li>
-				<li class="link">
-					<CLink title="Twitter" to="https://twitter.com/Ludoviko_" />
+				<li>
+					<CLink
+						:me="true"
+						title="Twitter"
+						to="https://twitter.com/Ludoviko_"
+					/>
 				</li>
 			</ul>
 			<CText>Switch Friend code: SW-1092-1929-2801</CText>

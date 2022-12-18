@@ -1,8 +1,14 @@
 <template>
 	<a
-		v-if="p.to.includes('http')"
+		v-if="p.me == true"
+		rel="me"
+		class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark"
+		>{{ title }}{{ p.arrow ? " →" : "" }}</a
+	>
+	<a
+		v-else-if="p.to.includes('http')"
 		target="_blank"
-		:rel="p.to.includes('masto') ? 'me' : 'nofollow noreferrer'"
+		rel="nofollow noreferrer"
 		class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark"
 		:href="p.to"
 	>
@@ -30,5 +36,6 @@ const p = defineProps({
 	title: { type: String, required: true },
 	to: { type: String, required: true },
 	arrow: { type: Boolean, default: true },
+	me: { type: Boolean, default: false },
 });
 </script>
