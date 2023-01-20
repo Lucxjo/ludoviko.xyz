@@ -15,7 +15,5 @@ declare module '@vue/runtime-core' {
     HomeView: typeof import('./src/views/HomeView.vue')['default']
     MCView: typeof import('./src/views/MCView.vue')['default']
     PrivacyView: typeof import('./src/views/PrivacyView.vue')['default']
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
   }
 }

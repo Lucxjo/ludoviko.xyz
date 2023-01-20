@@ -1,24 +1,70 @@
 <template>
-	<div class="container">
-		<div class="p-5 m-11 rounded-2xl bg-blue shadow-lg dark:bg-blue-dark">
-			<img src="/RingRingTechSupport.png" alt="Ludoviko" />
-			<CHeading weight="1" :hero="true">Saluton!</CHeading>
-			<CHeading :hero="true">
-				Welcome to my website! I'm Ludoviko, rarely known as Luĉjo. I
-				hope that you enjoy your stay here.
-			</CHeading>
-			<a
-				href="https://liberapay.com/Ludoviko/donate"
-				target="_blank"
-				rel="nofollow noreferrer"
-				><img
-					alt="Donate with Liberapay"
-					src="https://liberapay.com/assets/widgets/donate.svg"
-					decoding="async"
-					data-nimg="intrinsic"
-			/></a>
+	<div class="container shift">
+		<div class="p-5 m-auto max-w-5xl lg:grid lg:grid-cols-6">
+			<img
+				src="/RingRingTechSupport.png"
+				alt="Ludoviko"
+				class="col-span-1 my-auto rounded-full"
+			/>
+			<div class="col-span-5">
+				<CHeading
+					weight="1"
+					class="my-2 text-blue dark:text-blue-dark"
+					:hero="true"
+					>Saluton!</CHeading
+				>
+				<CHeading class="text-blue dark:text-blue-dark" :hero="true">
+					I'm Ludoviko, rarely known as Luĉjo. (they/them)
+				</CHeading>
+
+				<div class="grid grid-cols-2 col-span-1">
+					<div class="mx-auto">
+						<CLink
+							title="Matrix"
+							class="mr-1"
+							to="https://matrix.to/#/@ludoviko_:matrix.org"
+						></CLink>
+						<CLink
+							class="mx-1"
+							title="E-post"
+							to="mailto:me@ludoviko.ch"
+						/>
+						<CLink
+							class="mx-1"
+							title="Mastodon"
+							to="https://masto.nu/@Ludoviko"
+						/>
+					</div>
+
+					<div class="mx-auto col-span-1">
+						<a
+							@click="switchToAbout"
+							:class="
+								aboutSectVisible
+									? activeClasses
+									: inactiveClasses
+							"
+							>About Me</a
+						>
+						<a
+							@click="switchToSocial"
+							:class="
+								socialSectVisible
+									? activeClasses
+									: inactiveClasses
+							"
+							>Social</a
+						>
+					</div>
+				</div>
+			</div>
 		</div>
-		<CSect title="About" sub="So a bit about me:" id="about">
+		<CSect
+			v-if="aboutSectVisible"
+			title="About"
+			sub="So a bit about me:"
+			id="about"
+		>
 			<ul>
 				<CText as="li">Age: {{ age || 23 }}</CText>
 				<CText as="li">Location: Europe</CText>
@@ -30,17 +76,19 @@
 				<CText as="li">Languages: en-GB, es-ES, eo-EO</CText>
 			</ul>
 		</CSect>
-		<CSect title="Projects" sub="" id="projects">
-			<CCard
-				v-for="project in projects"
-				v-bind:key="project.title"
-				:title="project.title"
-				:desc="project.desc"
-				:links="project.links"
-			>
-			</CCard>
+		<CSect v-if="projectsSectVisible" title="Projects" sub="" id="projects">
+			<div class="grid grid-cols-2">
+				<CCard
+					v-for="project in projects"
+					v-bind:key="project.title"
+					:title="project.title"
+					:desc="project.desc"
+					:links="project.links"
+				>
+				</CCard>
+			</div>
 		</CSect>
-		<CSect title="Social" id="social">
+		<CSect v-if="socialSectVisible" title="Social" id="social">
 			<CText>
 				Here are the places that I spend my time on the internet. Feel
 				free to follow and chat on any of them!
@@ -76,7 +124,7 @@
 				<li>
 					<CLink
 						:me="true"
-						title="E-mail"
+						title="E-post"
 						to="mailto:me@ludoviko.ch"
 					/>
 				</li>
@@ -94,6 +142,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+
 let age: number | undefined = undefined;
 
 fetch("https://api.ludoviko.ch/v1/about/birthday/age")
@@ -104,6 +154,70 @@ fetch("https://api.ludoviko.ch/v1/about/birthday/age")
 	.catch((err) => {
 		console.error(err);
 	});
+
+const aboutSectVisible = ref(false);
+const projectsSectVisible = ref(false);
+const socialSectVisible = ref(false);
+const mcSectVisible = ref(false);
+
+const activeClasses = `mx-1 underline hover:text-text-0 hover:dark:text-text-dark-0 text-blue dark:text-blue-dark  cursor-pointer`;
+const inactiveClasses = `mx-1 underline text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark cursor-pointer`;
+
+const switchToAbout = () => {
+	if (aboutSectVisible.value) {
+		aboutSectVisible.value = false;
+		projectsSectVisible.value = false;
+		socialSectVisible.value = false;
+		mcSectVisible.value = false;
+	} else {
+		aboutSectVisible.value = true;
+		projectsSectVisible.value = false;
+		socialSectVisible.value = false;
+		mcSectVisible.value = false;
+	}
+};
+
+const switchToProjects = () => {
+	if (projectsSectVisible.value) {
+		aboutSectVisible.value = false;
+		projectsSectVisible.value = false;
+		socialSectVisible.value = false;
+		mcSectVisible.value = false;
+	} else {
+		aboutSectVisible.value = false;
+		projectsSectVisible.value = true;
+		socialSectVisible.value = false;
+		mcSectVisible.value = false;
+	}
+};
+
+const switchToSocial = () => {
+	if (socialSectVisible.value) {
+		aboutSectVisible.value = false;
+		projectsSectVisible.value = false;
+		socialSectVisible.value = false;
+		mcSectVisible.value = false;
+	} else {
+		aboutSectVisible.value = false;
+		projectsSectVisible.value = false;
+		socialSectVisible.value = true;
+		mcSectVisible.value = false;
+	}
+};
+
+const switchToMC = () => {
+	if (mcSectVisible.value) {
+		aboutSectVisible.value = false;
+		projectsSectVisible.value = false;
+		socialSectVisible.value = false;
+		mcSectVisible.value = false;
+	} else {
+		aboutSectVisible.value = false;
+		projectsSectVisible.value = false;
+		socialSectVisible.value = false;
+		mcSectVisible.value = true;
+	}
+};
 
 const projects = [
 	{
@@ -131,7 +245,7 @@ const projects = [
 		],
 	},
 	{
-		title: "Ludoviko.xyz/Ludoviko.ch",
+		title: "Ludoviko.ch",
 		desc: "This website! Technically it is one of my projects, so it deserves to be in this list. Right? Built with VueJS 3 + Vite.",
 		links: [
 			{
