@@ -16,7 +16,7 @@ import { computed } from "vue";
 const props = defineProps({
 	weight: {
 		type: String,
-		required: true,
+		required: false,
 		default: "2",
 	},
 	hero: {

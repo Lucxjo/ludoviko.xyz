@@ -10,6 +10,8 @@
 </template>
 
 <script setup lang="ts">
+import CHeading from './CHeading.vue';
+
 const props = defineProps({
 	title: {
 		type: String,

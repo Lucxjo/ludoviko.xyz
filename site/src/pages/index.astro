@@ -1,0 +1,287 @@
+---
+import CHeading from "../components/CHeading.vue";
+import CLink from "../components/CLink.vue";
+import CSect from "../components/CSect.vue";
+import CText from "../components/CText.vue";
+import "../styles/main.css";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/RingRingTechSupport.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta property="og:title" content="Ludoviko" />
+		<meta
+			name="description"
+			content="Ludo's little place on the internet"
+		/>
+		<meta
+			property="og:description"
+			content="Ludo's little place on the internet"
+		/>
+		<meta property="og:type" content="website" />
+		<meta
+			property="og:image"
+			content="https://ludoviko.ch/RingRingTechSupport.png"
+		/>
+		<meta property="twitter:card" content="summary" />
+		<meta property="twitter:creator" content="@Ludoviko_" />
+		<meta property="twitter:site" content="@Ludoviko_" />
+		<link rel="pgpkey" href="/3EF88DA9.asc" />
+		<link rel="me" href="https://masto.nu/@Ludoviko" />
+		<link rel="me" href="https://twitter.com/Ludoviko_" />
+		<link rel="me" href="https://github.com/Lucxjo" />
+		<link rel="openid.delegate" href="https://ludoviko.ch" />
+		<link rel="openid.server" href="https://openid.indieauth.com/openid" />
+		<link rel="authorization_endpoint" href="https://indielogin.com/auth">
+		<title>Ludoviko</title>
+	</head>
+	<body>
+		<main class="flex justify-center items-center h-screen" id="mainBody">
+			<div class="container shift">
+				<div class="p-5 m-auto max-w-5xl lg:grid lg:grid-cols-6">
+					<img
+						src="/RingRingTechSupport.png"
+						alt="Ludoviko"
+						class="col-span-1 my-auto rounded-full"
+					/>
+					<div class="col-span-5">
+						<CHeading
+							weight="1"
+							class="my-2 text-blue dark:text-blue-dark"
+							hero={true}>
+							Saluton!
+						</CHeading>
+						<CHeading class="text-blue dark:text-blue-dark" hero={true}>
+							I'm Ludoviko, rarely known as Luĉjo. (they/them)
+						</CHeading>
+
+						<div class="grid grid-cols-2 col-span-1">
+							<div class="mx-auto" id="basicSocials">
+								<noscript>
+								<CLink
+									title="Matrix"
+									class="mr-1"
+									to="https://matrix.to/#/@ludoviko_:matrix.org"/>
+								<CLink
+									class="mx-1"
+									title="E-post"
+									to="mailto:me@ludoviko.ch" />
+								<CLink
+									class="mx-1"
+									title="Mastodon"
+									to="https://masto.nu/@Ludoviko"/>
+								</noscript>
+							</div>
+							<div class="mx-auto col-span-1">
+								<a
+									class="mx-1 underline text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark cursor-pointer"
+										id="aboutBtn">About Me</a>
+								<a
+									class="mx-1 underline text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark cursor-pointer"
+									id="socialBtn">Social</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<CSect
+					v-if="aboutSectVisible"
+					title="About"
+					sub="So a bit about me:"
+					id="aboutSect"
+					style="display: none;">
+					<ul>
+						<CText as="li">Age: <span id="age">23</span></CText>
+						<CText as="li">Location: Europe</CText>
+						<CText as="li"
+							>Sexuality: <span id="sexuality">Whatever it is, it isn't straight!</span></CText
+						>
+						<CText as="li">Pronouns: <span id="pronouns">they/them/theirs</span></CText>
+						<CText as="li">Gender: <span id="gender">Male-ish</span></CText>
+						<CText as="li">Languages: en-GB, es-ES, eo-EO</CText>
+					</ul>
+				</CSect>
+
+				<CSect v-if="socialSectVisible" title="Social" id="socialSect" style="display: none;">
+			<CText>
+				Here are the places that I spend my time on the internet. Feel
+				free to follow and chat on any of them!
+			</CText>
+			<ul>
+				<li>
+					<CLink
+						me={true}
+						title="Mastodon"
+						to="https://masto.nu/@Ludoviko"
+					/>
+				</li>
+				<li>
+					<CLink
+						me={true}
+						title="GitHub"
+						to="https://github.com/Lucxjo"
+					/>
+				</li>
+				<li>
+					<CLink
+						me={true}
+						title="Matrix DM"
+						to="https://matrix.to/#/@ludoviko_:matrix.org"
+					/>
+				</li>
+				<li>
+					<CLink
+						title="Matrix Space"
+						to="https://matrix.to/#/#ludos-space:matrix.org"
+					/>
+				</li>
+				<li>
+					<CLink
+						me={true}
+						title="E-post"
+						to="mailto:me@ludoviko.ch"
+					/>
+				</li>
+				<li>
+					<CLink
+						me={true}
+						title="Twitter"
+						to="https://twitter.com/Ludoviko_"
+					/>
+				</li>
+			</ul>
+			<CText>Switch Friend code: SW-1092-1929-2801</CText>
+		</CSect>
+			</div>
+		</main>
+
+		<script>
+			const activeClasses = `mx-1 underline hover:text-text-0 hover:dark:text-text-dark-0 text-blue dark:text-blue-dark  cursor-pointer`;
+			const inactiveClasses = `mx-1 underline text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark cursor-pointer`;
+
+			enum Sections {
+				NONE,
+				ABOUT,
+				PROJECTS,
+				SOCIAL,
+			}
+
+			let selectedSect = Sections.NONE;
+
+			let {age, sexuality, pronouns, gender} = {
+				age: 23, 
+				sexuality: "Whatever it is, it isn't straight!", 
+				pronouns: "they/them/theirs", 
+				gender: "Male-ish"
+			}
+
+			/* const getBlurb = async () => {
+				const data = fetch("https://api.ludoviko.ch/v1")
+					.then((res) => res.json())
+					.then((res) => {
+						console.log(res);
+						if (res.age) age = res.age
+						if (res.sexuality) sexuality = res.sexuality
+						if (res.pronouns) pronouns = res.pronouns
+						if (res.gender) gender = res.gender
+
+						document.getElementById("age")!.innerText = `${age}`
+						document.getElementById("sexuality")!.innerText = `${sexuality}`
+						document.getElementById("pronouns")!.innerText = `${pronouns}`
+						document.getElementById("gender")!.innerText = `${gender}`
+					})
+			} */
+
+			const getSocials = async () => {
+				const data = fetch("/api/socials")
+					.then((res) => res.json())
+					.then((res) => {
+						console.log(res);
+						let socials: {title: string, link: string, sect_only: boolean}[] = [];
+
+						for (let i = 0; i < res.length; i++) {
+							const social = res[i];
+							socials.push({
+								title: social.title,
+								link: social.link,
+								sect_only: social.sect_only
+							});
+						}
+
+						let socialsHTML = "";
+						let socialsSectHTML = "";
+
+						socials.forEach((social) => {
+							if (social.sect_only) {
+								socialsSectHTML += `
+									<a href="${social.link}" target="_blank" rel="noopener noreferrer" class="mx-1 underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark">
+										${social.title} →
+									</a>
+								`;
+							} else {
+								socialsHTML += `
+									<a href="${social.link}" target="_blank" rel="noopener noreferrer" class="mx-1 underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark">
+										${social.title} →
+									</a>
+								`;
+
+								socialsSectHTML += `
+									<a href="${social.link}" target="_blank" rel="noopener noreferrer" class="mx-1 underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark">
+										${social.title} →
+									</a>
+								`;
+							}
+						});
+
+						document.getElementById("basicSocials")!.innerHTML = socialsHTML;
+
+						console.log(socials)
+					})
+			}
+
+			window.onload = () => {
+				// getBlurb();
+				getSocials();
+			}
+
+			document.getElementById("aboutBtn")!.addEventListener("click", () => {
+
+				if (selectedSect === Sections.ABOUT) {
+					selectedSect = Sections.NONE;
+					document.getElementById("mainBody")!.className = "flex justify-center items-center h-screen";
+					document.getElementById("aboutBtn")!.className = inactiveClasses;
+					document.getElementById("socialBtn")!.className = inactiveClasses;
+					document.getElementById("aboutSect")!.style.display = "none";
+					document.getElementById("socialSect")!.style.display = "none";
+				} else {
+					// getBlurb();
+					document.getElementById("aboutBtn")!.className = activeClasses;
+					document.getElementById("socialBtn")!.className = inactiveClasses;
+					document.getElementById("mainBody")!.className = "";
+					document.getElementById("socialSect")!.style.display = "none";
+					document.getElementById("aboutSect")!.style.display = "block";
+					selectedSect = Sections.ABOUT;
+				}
+			});
+			document.getElementById("socialBtn")!.addEventListener("click", () => {
+				if (selectedSect === Sections.SOCIAL) {
+					selectedSect = Sections.NONE;
+					document.getElementById("mainBody")!.className = "flex justify-center items-center h-screen";
+					document.getElementById("socialBtn")!.className = inactiveClasses;
+					document.getElementById("aboutBtn")!.className = inactiveClasses;
+					document.getElementById("aboutSect")!.style.display = "none";
+					document.getElementById("socialSect")!.style.display = "none";
+				} else {
+					document.getElementById("aboutBtn")!.className = inactiveClasses;
+					document.getElementById("socialBtn")!.className = activeClasses;
+					document.getElementById("mainBody")!.className = "";
+					document.getElementById("aboutSect")!.style.display = "none";
+					document.getElementById("socialSect")!.style.display = "block";
+					selectedSect = Sections.SOCIAL;
+				}
+			});
+		</script>
+	</body>
+</html>

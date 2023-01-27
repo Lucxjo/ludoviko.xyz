@@ -21,14 +21,14 @@
 	>
 		<span>{{ title }}{{ p.arrow ? " →" : "" }}</span>
 	</a>
-	<RouterLink
+	<a
 		v-else
 		v-bind="$props"
 		class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark"
 		:to="p.to"
 	>
 		<span>{{ p.title }}{{ p.arrow ? " →" : "" }}</span>
-	</RouterLink>
+	</a>
 </template>
 
 <script setup lang="ts">
