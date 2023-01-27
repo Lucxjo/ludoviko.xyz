@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"log"
 	"net/http"
 	"os"
@@ -23,6 +24,13 @@ type SocialLinks struct {
 	Description string `json:"description" gorm:"default:''"`
 }
 
+var clean bool
+
+func handleFlags() {
+	flag.BoolVar(&clean, "clean", false, "Clean the database")
+	flag.Parse()
+}
+
 func main() {
 	godotenv.Load()
 	r := mux.NewRouter()
@@ -35,7 +43,10 @@ func main() {
 		log.Fatalf("failed to connect database: %v\n", err)
 	}
 
-	// db.Migrator().DropTable(&SocialLinks{})
+	if (clean) {
+		db.Migrator().DropTable(&SocialLinks{})
+	}
+	
 	db.AutoMigrate(&SocialLinks{})
 
 	// api routes
@@ -75,10 +86,9 @@ func main() {
 			w.Write([]byte("Unauthorized"))
 			return
 		}
-		
+
 		var social SocialLinks
 		json.NewDecoder(req.Body).Decode(&social)
-		log.Println(social)
 		db.Create(&social)
 		json.NewEncoder(w).Encode(social)
 	}).Methods("POST")

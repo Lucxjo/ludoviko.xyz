@@ -109,48 +109,50 @@ import "../styles/main.css";
 				Here are the places that I spend my time on the internet. Feel
 				free to follow and chat on any of them!
 			</CText>
-			<ul>
-				<li>
-					<CLink
-						me={true}
-						title="Mastodon"
-						to="https://masto.nu/@Ludoviko"
-					/>
-				</li>
-				<li>
-					<CLink
-						me={true}
-						title="GitHub"
-						to="https://github.com/Lucxjo"
-					/>
-				</li>
-				<li>
-					<CLink
-						me={true}
-						title="Matrix DM"
-						to="https://matrix.to/#/@ludoviko_:matrix.org"
-					/>
-				</li>
-				<li>
-					<CLink
-						title="Matrix Space"
-						to="https://matrix.to/#/#ludos-space:matrix.org"
-					/>
-				</li>
-				<li>
-					<CLink
-						me={true}
-						title="E-post"
-						to="mailto:me@ludoviko.ch"
-					/>
-				</li>
-				<li>
-					<CLink
-						me={true}
-						title="Twitter"
-						to="https://twitter.com/Ludoviko_"
-					/>
-				</li>
+			<ul id="socialsList">
+				<noscript>
+					<li>
+						<CLink
+							me={true}
+							title="Mastodon"
+							to="https://masto.nu/@Ludoviko"
+						/>
+					</li>
+					<li>
+						<CLink
+							me={true}
+							title="GitHub"
+							to="https://github.com/Lucxjo"
+						/>
+					</li>
+					<li>
+						<CLink
+							me={true}
+							title="Matrix DM"
+							to="https://matrix.to/#/@ludoviko_:matrix.org"
+						/>
+					</li>
+					<li>
+						<CLink
+							title="Matrix Space"
+							to="https://matrix.to/#/#ludos-space:matrix.org"
+						/>
+					</li>
+					<li>
+						<CLink
+							me={true}
+							title="E-post"
+							to="mailto:me@ludoviko.ch"
+						/>
+					</li>
+					<li>
+						<CLink
+							me={true}
+							title="Twitter"
+							to="https://twitter.com/Ludoviko_"
+						/>
+					</li>
+				</noscript>
 			</ul>
 			<CText>Switch Friend code: SW-1092-1929-2801</CText>
 		</CSect>
@@ -195,10 +197,9 @@ import "../styles/main.css";
 			} */
 
 			const getSocials = async () => {
-				const data = fetch("/api/socials")
+				fetch("/api/socials")
 					.then((res) => res.json())
 					.then((res) => {
-						console.log(res);
 						let socials: {title: string, link: string, sect_only: boolean}[] = [];
 
 						for (let i = 0; i < res.length; i++) {
@@ -213,31 +214,43 @@ import "../styles/main.css";
 						let socialsHTML = "";
 						let socialsSectHTML = "";
 
-						socials.forEach((social) => {
+						socials.forEach((social, i) => {
 							if (social.sect_only) {
 								socialsSectHTML += `
-									<a href="${social.link}" target="_blank" rel="noopener noreferrer" class="mx-1 underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark">
-										${social.title} →
-									</a>
+									<li>
+										<a href="${social.link}" target="_blank" rel="noopener noreferrer" class="mx-1 underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark">
+											${social.title} →
+										</a>
+									</li>
 								`;
 							} else {
-								socialsHTML += `
-									<a href="${social.link}" target="_blank" rel="noopener noreferrer" class="mx-1 underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark">
-										${social.title} →
-									</a>
+								if (i === 0) {
+									socialsHTML += `
+										<a href="${social.link}" target="_blank" rel="noopener noreferrer" class="mr-1 underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark">
+											${social.title} →
+										</a>
+									`;
+								} else {
+									socialsHTML += `
+										<a href="${social.link}" target="_blank" rel="noopener noreferrer" class="mx-1 underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark">
+											${social.title} →
+										</a>
 								`;
+								}
+								
 
 								socialsSectHTML += `
-									<a href="${social.link}" target="_blank" rel="noopener noreferrer" class="mx-1 underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark">
-										${social.title} →
-									</a>
+									<li>
+										<a href="${social.link}" target="_blank" rel="noopener noreferrer" class="mx-1 underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark">
+											${social.title} →
+										</a>
+									</li>
 								`;
 							}
 						});
 
 						document.getElementById("basicSocials")!.innerHTML = socialsHTML;
-
-						console.log(socials)
+						document.getElementById("socialsList")!.innerHTML = socialsSectHTML;
 					})
 			}
 
