@@ -101,7 +101,7 @@ func main() {
 
 	r.HandleFunc("/.well-known/matrix/server", func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte(`{"m.server":"dendrite.ludoviko.ch:443"}`))
+		w.Write([]byte(`{"m.server":"dendrite.ludoviko.ch:8448"}`))
 	}).Methods("GET")
 
 	// Serve static files
