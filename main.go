@@ -94,15 +94,21 @@ func main() {
 	}).Methods("POST")
 
 	r.HandleFunc("/.well-known/matrix/client", func(w http.ResponseWriter, req *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
+		w.Header().Add("Content-Type", "application/json")
+		w.Header().Add("Access-Control-Allow-Origin", "*")
+		w.Header().Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Add("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization")
 		w.Write([]byte(`{"m.homeserver":{"base_url":"https://matrix.ludoviko.ch"},"m.identity_server":{"base_url":"https://vector.im"}, "org.matrix.msc3575.proxy": {"url": "https://sync.matrix.ludoviko.ch"}}`))
-	}).Methods("GET")
+	})
 
 
 	r.HandleFunc("/.well-known/matrix/server", func(w http.ResponseWriter, req *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
+		w.Header().Add("Content-Type", "application/json")
+		w.Header().Add("Access-Control-Allow-Origin", "*")
+		w.Header().Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Add("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization")
 		w.Write([]byte(`{"m.server":"matrix.ludoviko.ch:443"}`))
-	}).Methods("GET")
+	})
 
 	// Serve static files
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./dist")))
