@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"log"
 	"net/http"
@@ -11,18 +10,11 @@ import (
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-)
 
-type SocialLinks struct {
-	ID uint `json:"id" gorm:"primary_key;autoIncrement;not null"`
-	SectOnly bool `json:"sect_only"`
-	Link string `json:"link" gorm:"default:''"`
-	Icon string `json:"icon" gorm:"default:''"`
-	CreatedAt int64 `json:"created_at" gorm:"autoCreateTime:milli"`
-	UpdatedAt int64 `json:"updated_at" gorm:"autoUpdateTime:milli"`
-	Title string `json:"title" gorm:"default:''"`
-	Description string `json:"description" gorm:"default:''"`
-}
+	"github.com/lucxjo/web/models"
+	"github.com/lucxjo/web/routes"
+	"github.com/lucxjo/web/routes/routes-base"
+)
 
 var clean bool
 
@@ -43,79 +35,15 @@ func main() {
 		log.Fatalf("failed to connect database: %v\n", err)
 	}
 
-	if (clean) {
-		db.Migrator().DropTable(&SocialLinks{})
+	if clean {
+		db.Migrator().DropTable(&models.SocialLinks{})
 	}
-	
-	db.AutoMigrate(&SocialLinks{})
 
-	// api routes
-	api := r.PathPrefix("/api").Subrouter()
+	db.AutoMigrate(&models.SocialLinks{})
 
-	api.HandleFunc("/test", func(w http.ResponseWriter, req *http.Request) {
-		w.Write([]byte("Hello World"))
-	}).Methods("GET")
-
-	api.HandleFunc("/socials", func(w http.ResponseWriter, req *http.Request) {
-		var socials []SocialLinks
-		db.Find(&socials)
-		json.NewEncoder(w).Encode(socials)
-	}).Methods("GET")
-
-	api.HandleFunc("/socials/{id}", func(w http.ResponseWriter, req *http.Request) {
-		var social SocialLinks
-		vars := mux.Vars(req)
-		db.First(&social, vars["id"])
-		json.NewEncoder(w).Encode(social)
-	}).Methods("GET")
-
-	api.HandleFunc("/socials/{id}", func(w http.ResponseWriter, req *http.Request) {
-		vars := mux.Vars(req)
-		headers := req.Header.Get("Authorization")
-		if headers == os.Getenv("MASTER_AUTH") {
-			db.Delete(&SocialLinks{}, vars["id"])
-		} else {
-			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte("Unauthorized"))
-		}
-	}).Methods("DELETE")
-
-	api.HandleFunc("/socials", func(w http.ResponseWriter, req *http.Request) {
-		if req.Header.Get("Authorization") != os.Getenv("MASTER_AUTH") {
-			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte("Unauthorized"))
-			return
-		}
-
-		var social SocialLinks
-		json.NewDecoder(req.Body).Decode(&social)
-		db.Create(&social)
-		json.NewEncoder(w).Encode(social)
-	}).Methods("POST")
-
-	r.HandleFunc("/.well-known/matrix/client", func(w http.ResponseWriter, req *http.Request) {
-		w.Header().Add("Content-Type", "application/json")
-		w.Header().Add("Access-Control-Allow-Origin", "*")
-		w.Header().Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-		w.Header().Add("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization")
-		w.Write([]byte(`{"m.homeserver":{"base_url":"https://matrix.ludoviko.ch"},"m.identity_server":{"base_url":"https://vector.im"}, "org.matrix.msc3575.proxy": {"url": "https://sync.matrix.ludoviko.ch"}}`))
-	})
-
-
-	r.HandleFunc("/.well-known/matrix/server", func(w http.ResponseWriter, req *http.Request) {
-		w.Header().Add("Content-Type", "application/json")
-		w.Header().Add("Access-Control-Allow-Origin", "*")
-		w.Header().Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-		w.Header().Add("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization")
-		w.Write([]byte(`{"m.server":"matrix.ludoviko.ch:443"}`))
-	})
-
-	// Serve static files
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./dist")))
-
-	r.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		http.ServeFile(w, req, "./dist/index.html")
-	}).Methods("GET")
+	routes.ApiRouteHandler(db, r)
+	routes.WellKnownsRouteHandler(r)
+	routesbase.HandleIndexRoutes(r)
 
 	http.ListenAndServe(":3000", r)
 }
