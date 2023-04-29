@@ -7,7 +7,6 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
-	"github.com/lucxjo/web/auth"
 	"github.com/lucxjo/web/models"
 	"gorm.io/gorm"
 )
@@ -17,16 +16,6 @@ func ApiRouteHandler(db *gorm.DB, r *mux.Router) {
 
 	apiRoute.HandleFunc("/test", func(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte("Hello World"))
-	}).Methods("GET")
-
-	apiRoute.HandleFunc("/test/jwt", func(w http.ResponseWriter, req *http.Request) {
-		token, err := auth.GenerateJwt("test")
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte("Internal Server Error"))
-			return
-		}
-		w.Write([]byte(token))
 	}).Methods("GET")
 
 	apiRoute.HandleFunc("/socials", func(w http.ResponseWriter, req *http.Request) {

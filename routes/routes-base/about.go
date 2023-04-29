@@ -12,16 +12,9 @@ import (
 	"github.com/lucxjo/web/models"
 )
 
-type SocialLinks struct {
-	Name string `json:"title"`
-	To  string `json:"link"`
-	Padding string `json:"padding"`
-	SectOnly bool `json:"sect_only"`
-}
-
-func HandleIndexRoutes(r *mux.Router) {
-	r.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		tmpl, _ := template.ParseFiles("./dist/index.tmpl")
+func HandleAboutRoutes(r *mux.Router) {
+	r.HandleFunc("/about", func(w http.ResponseWriter, req *http.Request) {
+		tmpl, _ := template.ParseFiles("./dist/about.tmpl")
 
 		resp, err := http.Get("http://localhost:3000/api/socials")
 
@@ -57,8 +50,5 @@ func HandleIndexRoutes(r *mux.Router) {
 			return
 		}
 	}).Methods("GET")
-
-	// Serve static files
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./dist")))
 
 }

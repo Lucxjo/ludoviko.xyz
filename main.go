@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"log"
 	"net/http"
 	"os"
 
@@ -14,6 +13,7 @@ import (
 	"github.com/lucxjo/web/models"
 	"github.com/lucxjo/web/routes"
 	"github.com/lucxjo/web/routes/routes-base"
+	log "github.com/sirupsen/logrus"
 )
 
 var clean bool
@@ -43,7 +43,13 @@ func main() {
 
 	routes.ApiRouteHandler(db, r)
 	routes.WellKnownsRouteHandler(r)
+	routesbase.HandleBlogRoutes(r)
+	routesbase.HandleSocialRoutes(r)
+	routesbase.HandleAboutRoutes(r)
 	routesbase.HandleIndexRoutes(r)
 
-	http.ListenAndServe(":3000", r)
+	err = http.ListenAndServe(":3000", r)
+	if err != nil {
+		log.Fatalf("failed to start server: %v", err)
+	}
 }

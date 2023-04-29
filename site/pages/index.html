@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" href="/RingRingTechSupport.ico">
+		<meta name="viewport" content="width=device-width">
+		<meta property="og:title" content="Ludoviko">
+		<meta name="description" content="Ludo's little place on the internet">
+		<meta property="og:description" content="Ludo's little place on the internet">
+		<meta property="og:type" content="website">
+		<meta property="og:image" content="https://ludoviko.ch/RingRingTechSupport.png">
+		<meta property="twitter:card" content="summary">
+		<meta property="twitter:creator" content="@Ludoviko_">
+		<meta property="twitter:site" content="@Ludoviko_">
+		<link rel="pgpkey" href="/3EF88DA9.asc">
+		<link rel="me" href="https://masto.nu/@Ludoviko">
+		<link rel="me" href="https://twitter.com/Ludoviko_">
+		<link rel="me" href="https://github.com/Lucxjo">
+		<link rel="openid.delegate" href="https://ludoviko.ch">
+		<link rel="openid.server" href="https://openid.indieauth.com/openid">
+		<link rel="authorization_endpoint" href="https://indielogin.com/auth">
+		<link rel="stylesheet" href="./styles/output.css">
+		<title>Ludoviko</title>
+	</head>
+	<body>
+		<main class="flex justify-center items-center h-screen" id="mainBody">
+			<div class="container shift">
+				<div class="p-5 m-auto max-w-5xl lg:grid lg:grid-cols-6">
+					<img src="/RingRingTechSupport.png" alt="Ludoviko" class="col-span-1 my-auto rounded-full">
+					<div class="col-span-5">
+						<h1 class="text-5xl font-bold text-text-dark-0 dark:text-base-dark my-2 text-blue dark:text-blue-dark"><!--[-->
+							Saluton!
+						<!--]--></h1>
+						<h2 class="text-3xl font-semibold text-text-dark-0 dark:text-base-dark text-blue dark:text-blue-dark"><!--[-->
+							I'm Ludoviko, rarely known as Luĉjo. (they/them)
+						<!--]--></h2>
+
+						<div class="grid grid-cols-2 col-span-1">
+							<div class="mx-auto" id="basicSocials">
+								{{range .}}
+								<a target="_blank" rel="nofollow noreferrer" class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark m{{.Padding}}-1" href="{{.To}}"><span>{{.Name}} →</span></a>
+								{{end}}
+							</div>
+							<div class="mx-auto col-span-1">
+								<a class="mx-1 underline text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark cursor-pointer" href="/about" id="aboutBtn">About Me</a>
+								<a class="mx-1 underline text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark cursor-pointer" href="/social" id="socialBtn">Social</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="aboutSect" class="p-8 m-11 bg-base dark:bg-surface-dark-0 rounded-2xl shadow-lg" v-if="aboutSectVisible" style="display:none;"><h1 class="text-5xl font-bold text-blue dark:text-blue-dark"><!--[-->About<!--]--></h1><h2 class="text-3xl font-semibold text-text-0 dark:text-text-dark-0"><!--[-->So a bit about me:<!--]--></h2><!--[--><ul>
+						<li class="text-lg text-text-0 dark:text-text-dark-0"><!--[-->Age: <span id="age">23</span><!--]--></li>
+						<li class="text-lg text-text-0 dark:text-text-dark-0"><!--[-->Location: Europe<!--]--></li>
+						<li class="text-lg text-text-0 dark:text-text-dark-0"><!--[-->Sexuality: <span id="sexuality">Whatever it is, it isn't straight!</span><!--]--></li>
+						<li class="text-lg text-text-0 dark:text-text-dark-0"><!--[-->Pronouns: <span id="pronouns">they/them/theirs</span><!--]--></li>
+						<li class="text-lg text-text-0 dark:text-text-dark-0"><!--[-->Gender: <span id="gender">Male-ish</span><!--]--></li>
+						<li class="text-lg text-text-0 dark:text-text-dark-0"><!--[-->Languages: en-GB, es-ES, eo-EO<!--]--></li>
+					</ul><!--]--></div>
+			</div>
+		</main>
+	</body>
+</html>

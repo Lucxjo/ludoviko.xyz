@@ -1,12 +1,14 @@
-FROM node:18 as node
+FROM denoland/deno:alpine as node
 WORKDIR /app
 COPY ./site/ ./site/
-RUN corepack enable
-RUN cd site && pnpm install && pnpm run build
+RUN cd ./site && chmod +x ./twind-linux && deno run --allow-read --allow-write --allow-run ./prod.ts
 
 FROM golang:1.19-alpine as go
 WORKDIR /app
 COPY ./go.mod ./go.sum ./main.go ./
+COPY ./models/*.go ./models/
+COPY ./routes/*.go ./routes/
+COPY ./routes/routes-base/*.go ./routes/routes-base/
 RUN go build .
 
 FROM alpine:3.17
