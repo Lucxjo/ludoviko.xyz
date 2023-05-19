@@ -55,7 +55,7 @@ func MatrixServer(w http.ResponseWriter, req *http.Request) {
 	w.Header().Add("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization")
 
 	wk := MatrixServerData{}
-	wk.Server = "matrix.ludoviko.ch:443"
+	wk.Server = "matrix.ludoviko.ch:8448"
 
 	js := json.NewEncoder(w).Encode(wk)
 

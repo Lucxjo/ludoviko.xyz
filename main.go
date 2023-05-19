@@ -43,7 +43,6 @@ func main() {
 
 	routes.ApiRouteHandler(db, r)
 	routes.WellKnownsRouteHandler(r)
-	routesbase.HandleBlogRoutes(r)
 	routesbase.HandleSocialRoutes(r)
 	routesbase.HandleAboutRoutes(r)
 	routesbase.HandleIndexRoutes(r)
