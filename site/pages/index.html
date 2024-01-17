@@ -12,14 +12,17 @@
 		<meta property="twitter:card" content="summary">
 		<meta property="twitter:creator" content="@Ludoviko_">
 		<meta property="twitter:site" content="@Ludoviko_">
-		<link rel="pgpkey" href="/3EF88DA9.asc">
+		<link rel="pgpkey" href="/key.asc">
 		<link rel="me" href="https://masto.nu/@Ludoviko">
 		<link rel="me" href="https://twitter.com/Ludoviko_">
 		<link rel="me" href="https://github.com/Lucxjo">
 		<link rel="openid.delegate" href="https://ludoviko.ch">
 		<link rel="openid.server" href="https://openid.indieauth.com/openid">
-		<link rel="authorization_endpoint" href="https://indielogin.com/auth">
 		<link rel="stylesheet" href="./styles/output.css">
+		<link rel="prefetch" href="/social">
+		<link rel="preconnect" href="https://rsms.me/">
+		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+		<link rel="prefetch" href="/about">
 		<title>Ludoviko</title>
 	</head>
 	<body>
@@ -40,6 +43,7 @@
 								{{range .}}
 								<a target="_blank" rel="nofollow noreferrer" class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark m{{.Padding}}-1" href="{{.To}}"><span>{{.Name}} →</span></a>
 								{{end}}
+								<a class="underline text-lg text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark ml-1" href="xmpp:louis@hollingworth.nl"><span>XMPP →</span></a>
 							</div>
 							<div class="mx-auto col-span-1">
 								<a class="mx-1 underline text-text-0 dark:text-text-dark-0 hover:text-blue hover:dark:text-blue-dark cursor-pointer" href="/about" id="aboutBtn">About Me</a>

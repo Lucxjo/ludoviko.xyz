@@ -31,3 +31,4 @@ twind-*
 .env
 
 output.css
+.envrc
