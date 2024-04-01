@@ -3,7 +3,7 @@ package routesbase
 import (
 	"encoding/json"
 	"html/template"
-	"io/ioutil"
+	"io"
 	"net/http"
 
 	//"strings"
@@ -26,7 +26,7 @@ func HandleAboutRoutes(r *mux.Router) {
 
 		defer resp.Body.Close()
 
-		body, err := ioutil.ReadAll(resp.Body)
+		body, err := io.ReadAll(resp.Body)
 
 		if err != nil {
 			return

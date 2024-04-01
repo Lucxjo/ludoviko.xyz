@@ -3,13 +3,14 @@ package routesbase
 import (
 	"encoding/json"
 	"html/template"
-	"io/ioutil"
+	"io"
 	"net/http"
 
 	//"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/lucxjo/web/models"
+	log "github.com/sirupsen/logrus"
 )
 
 type SocialLinks struct {
@@ -26,6 +27,7 @@ func HandleIndexRoutes(r *mux.Router) {
 		resp, err := http.Get("http://localhost:3000/api/socials")
 
 		if err != nil {
+			log.Errorf("Index get error: %v", err)
 			return
 		}
 
@@ -33,9 +35,10 @@ func HandleIndexRoutes(r *mux.Router) {
 
 		defer resp.Body.Close()
 
-		body, err := ioutil.ReadAll(resp.Body)
+		body, err := io.ReadAll(resp.Body)
 
 		if err != nil {
+			log.Errorf("Index io Read error: %v", err)
 			return
 		}
 
