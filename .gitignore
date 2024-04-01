@@ -29,6 +29,7 @@ twind-*
 *.sln
 *.sw?
 .env
+/data
 
 output.css
 .envrc

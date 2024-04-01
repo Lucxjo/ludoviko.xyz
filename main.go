@@ -7,7 +7,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
-	"gorm.io/driver/postgres"
+	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 
 	"github.com/lucxjo/web/models"
@@ -27,9 +27,14 @@ func main() {
 	godotenv.Load()
 	r := mux.NewRouter()
 
-	dsn := os.Getenv("DB_URI")
+	var dsn string
+	if os.Getenv("DB_URI") != "" {
+		dsn = os.Getenv("DB_URI")
+	} else {
+		dsn = "./data/website.db"
+	}
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Fatalf("failed to connect database: %v\n", err)

@@ -3,7 +3,7 @@ WORKDIR /app
 COPY ./site/ ./site/
 RUN cd ./site && chmod +x ./twind-linux && deno run --allow-read --allow-write --allow-run ./prod.ts
 
-FROM golang:1.19-alpine as go
+FROM golang:1.21-alpine as go
 WORKDIR /app
 COPY ./go.mod ./go.sum ./main.go ./
 COPY ./models/*.go ./models/
